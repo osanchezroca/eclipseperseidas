@@ -1,41 +1,60 @@
-# Eclipse + Perseidas · Sabadell
+# Eclipsi + Perseides · Sabadell
 
-Guía web "en directo" para vivir el **eclipse solar del 12 de agosto de 2026** y las **Perseidas de esa misma noche**, hecha **para gente de Sabadell**: horarios en hora local, y las direcciones siempre referidas al paisaje que se ve desde aquí (Montserrat, La Mola, el Montseny) en vez de coordenadas o grados sueltos.
+**→ [osanchezroca.github.io/eclipseperseidas](https://osanchezroca.github.io/eclipseperseidas/)**
 
-No hace falta saber nada de astronomía: la página te dice qué toca ahora, hacia dónde mirar y qué no hacer. **En català per defecte**, con castellano a un toque.
+Guía web "en directo" para vivir el **eclipse solar del 12 de agosto de 2026** y las **Perseidas de esa misma noche** desde Sabadell. Hecha para gente de aquí y para gente que no sabe nada de astronomía: te dice qué toca ahora, hacia dónde mirar y qué no hacer.
 
-## Qué incluye
+Toda la información buscada estaba en formato astrónomo — azimut 286°, altura 4°, magnitud. Aquí las direcciones son el paisaje que se ve desde la ciudad: encima de Montserrat, el arco entre La Mola y el Montseny.
 
-- **Timeline en directo** desde las 18:00 hasta las 04:00: marca el momento actual, tacha lo que ya pasó y avisa de lo siguiente. De noche lo que no es "ahora" se apaga y se desatura para no molestar la vista adaptada (pasa el ratón o toca una tarjeta para verla entera).
-- **Brújula HUD fija arriba**: cinta de rumbos con el norte, los cardinales y los puntos del paisaje. El borde superior del móvil es el puntero. Vibra con detentes al barrer, con pulsos cada vez más seguidos al acercarse al objetivo y con una confirmación al fijarlo.
-- **Objetivos por fase**: el Sol eclipsado sobre Montserrat (~286°) durante la tarde; el arco entre La Mola y el Montseny (~13°) para las fugaces.
-- **Consejo flotante** bajo la brújula, distinto en cada momento. Mientras el Sol está fuera manda la regla de seguridad.
-- **Cielo animado** de fondo: color real de cada hora, oscurecimiento en el máximo del eclipse (con Venus y Júpiter), Casiopea, el radiante de Perseo y lluvia de meteoros.
-- **Esquema dibujado** del momento máximo: desde tu sitio, por encima del escenario, el Sol sobre la silueta de Montserrat. Y pictogramas de qué mirar sin gafas (luz gris, sombras afiladas, medias lunas en el suelo, Venus).
-- **Català por defecto** y castellano con el selector `CA · ES` de la barra inferior.
-- **Slider de previsualización** para recorrer las 10 horas sin esperar a la noche.
+**En català por defecto**, castellano a un toque con el selector `CA · ES`.
+
+## Qué hace
+
+- **Línea de tiempo que se mueve sola**, de las 18:00 a las 04:00: marca el momento actual, tacha lo pasado y anuncia lo siguiente. Al abrir la página se coloca en la tarjeta de ahora, sin scroll ni botones.
+- **Brújula HUD fija arriba.** Cinta de rumbos con el norte, los cardinales y los puntos del paisaje; el borde superior del móvil es el puntero. El objetivo cambia con la fase: el Sol sobre Montserrat durante el eclipse, el arco de las fugaces por la noche, y modo "ve hacia allí" mientras te desplazas.
+- **Vibración como guía.** Un toque por cada marca de 5° al barrer, pulsos cada vez más seguidos al acercarte al objetivo y una ráfaga distinta al clavarlo. Se puede usar sin mirar la pantalla. Calla si el móvil no se mueve.
+- **Esquemas dibujados** en el momento en que hacen falta: desde la grada del anfiteatro con el Sol sobre la silueta de Montserrat, y en el campo estirado con los pies hacia el Montseny.
+- **Pictogramas de qué mirar sin gafas** en el máximo: luz gris, sombras afiladas, medias lunas en el suelo, Venus.
+- **Modo noche.** A partir de las 22:30 todo lo que no es "ahora" se apaga y se desatura para no molestar la vista adaptada; el ratón o un toque lo devuelve a color para repasar lo que viene.
+- **Aviso flotante por fase** bajo la brújula. Mientras el Sol está fuera, la regla de las gafas; luego "móvil guardado 30 min" y "mirada relajada".
+- **Cielo animado** de fondo: el color real de cada hora, el oscurecimiento del máximo con Venus y Júpiter, Casiopea, el radiante de Perseo y lluvia de meteoros.
+- **Slider de previsualización** para recorrer las diez horas sin esperar a la noche.
+- **Instalable** en la pantalla de inicio y con vista previa cuidada al compartir el enlace.
 
 ## Seguridad
 
-Gafas certificadas **ISO 12312-2** siempre que se mire al Sol. En Sabadell el eclipse es casi total (~99%) pero **no hay totalidad**, así que no existe ningún momento seguro sin gafas. Las gafas de sol no valen.
+Gafas certificadas **ISO 12312-2** siempre que se mire al Sol. En Sabadell el eclipse es casi total (~99%) pero **no hay totalidad**: no existe ningún momento seguro sin gafas, y las de sol no valen. El aviso está fijo en pantalla toda la tarde y no se puede cerrar.
 
-## Cómo funciona
+## Lo que a 99% no se ve
 
-Un `index.html` estático: sin build, sin dependencias, sin frameworks. Al lado, `manifest.webmanifest` + `icon.svg` para poder **instalarla en la pantalla de inicio** y abrirla a pantalla completa. La brújula usa `DeviceOrientationEvent` y la vibración `navigator.vibrate`, así que **hace falta abrirla por https desde el móvil** (en iOS hay que pulsar "Activar sensores"; iOS no vibra porque Safari no expone vibración web).
+Es la mitad del valor de la guía, porque mucha gente lo busca y se pierde el momento: **no hay corona, ni anillo de diamante, ni perlas de Baily**. Eso solo ocurre dentro de la franja de totalidad, que pasa por el sur de Lleida y Tarragona. El 1% de Sol que queda sigue siendo unas mil veces más brillante que la corona.
 
-Desplegado en Vercel (framework "Other", sin build). No hay service worker: sin cobertura en el campo, mejor abrirla antes de salir.
+Sí se ve: la luz volviéndose gris (sin llegar a noche), las sombras más afiladas, medias lunas proyectadas por las hojas y **Venus** (magnitud −4,4) como lo más fácil a simple vista. El Sol está a 2–4° del horizonte, así que hace falta horizonte oeste limpio.
+
+## Cómo está hecha
+
+Un solo `index.html` estático: sin build, sin dependencias, sin frameworks. Cuatro `<script>` independientes (idioma, timeline, cielo canvas, brújula) que se comunican por `window.__nightMin`, `window.T()` y `window.__buzz()`.
+
+- **Brújula:** `DeviceOrientationEvent` (`webkitCompassHeading` en iOS, `deviceorientationabsolute` en Android). **Requiere https**, así que funciona en el deploy y no en `file://`.
+- **Vibración:** `navigator.vibrate`. Solo Android/Chrome — iOS no expone vibración web — y el navegador la bloquea hasta el primer toque en la página, así que hay un aviso que lo desbloquea y desaparece.
+- **Idiomas:** el HTML está escrito en catalán y cada elemento traducible lleva su `data-es`. Los textos dinámicos viven en un diccionario. Para añadir texto: escríbelo en catalán y añade el `data-es`.
+- **Sin service worker** a propósito: nada que invalidar en cada deploy. Sin cobertura en el campo, mejor abrirla antes de salir.
+
+Ficheros: `index.html` (toda la app), `manifest.webmanifest` + `icon.svg` (instalable), `og.jpg` (vista previa al compartir), `CLAUDE.md` (contexto y decisiones del proyecto).
+
+Desplegada con **GitHub Pages** desde `main`. Se prueba en móvil por https y con el slider de previsualización, que cubre las diez horas sin esperar a la noche.
 
 ## Datos del evento
 
 | | |
 |---|---|
 | Inicio del eclipse | 19:35 CEST |
-| Máximo (~99%) | 20:29 · Sol a ~4° de altura, azimut ~286° sobre Montserrat |
+| Máximo (~99%) | 20:29 · Sol a ~4° de altura, sobre la silueta de Montserrat |
 | Fin del eclipse | 20:54 |
-| Perseidas | pico la noche del 12 al 13, Luna nueva · mejor ventana 01:00–03:00 |
+| Perseidas | pico la noche del 12 al 13, con luna nueva · mejor ventana 01:00–03:00 |
 
 Para el eclipse sirve cualquier sitio con el **horizonte oeste despejado** (la guía usa el anfiteatro del Parc Catalunya como referencia). Para las fugaces, cualquier campo a las afueras y de espaldas a las luces de la ciudad.
 
 ---
 
-Hecho por [Oscar](https://www.linkedin.com/in/osanchezroca/) + Claude.
+Hecho por [Oscar Sánchez](https://www.linkedin.com/in/osanchezroca/) con Claude. Código libre ([Unlicense](LICENSE)): cógelo y adáptalo a tu ciudad.
