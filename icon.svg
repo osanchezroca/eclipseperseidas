@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Eclipse y estrella fugaz">
+  <!-- zona segura para iconos maskables: todo lo importante dentro del 80% central -->
+  <rect width="512" height="512" fill="#0A0E1F"/>
+  <g transform="translate(256 244)">
+    <!-- corona -->
+    <circle r="150" fill="none" stroke="#F2A65A" stroke-width="7" opacity=".18"/>
+    <circle r="122" fill="none" stroke="#F2A65A" stroke-width="12" opacity=".34"/>
+    <circle r="102" fill="none" stroke="#F2A65A" stroke-width="20" opacity=".85"/>
+    <!-- disco lunar tapando el Sol -->
+    <circle r="92" fill="#0A0E1F"/>
+    <!-- último filo de Sol arriba a la derecha -->
+    <path d="M0-99A99 99 0 0 1 70-70" fill="none" stroke="#FFE6C2" stroke-width="13" stroke-linecap="round"/>
+  </g>
+  <!-- estrella fugaz -->
+  <g stroke-linecap="round" fill="none">
+    <path d="M418 96 L332 182" stroke="#7FD8C4" stroke-width="11" opacity=".9"/>
+    <path d="M332 182 L300 214" stroke="#7FD8C4" stroke-width="6" opacity=".35"/>
+  </g>
+  <circle cx="424" cy="90" r="9" fill="#EBF5FF"/>
+  <circle cx="108" cy="418" r="7" fill="#E9EAF2" opacity=".8"/>
+  <circle cx="404" cy="404" r="5" fill="#E9EAF2" opacity=".55"/>
+  <circle cx="88" cy="120" r="5" fill="#E9EAF2" opacity=".5"/>
+</svg>

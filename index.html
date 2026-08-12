@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Eclipse + Perseidas · Sabadell · en directo</title>
+<meta name="description" content="Guía en directo del eclipse solar del 12 de agosto de 2026 y las Perseidas de esa noche, desde Sabadell: qué toca ahora y hacia dónde mirar.">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0A0E1F">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Eclipse 2026">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#0A0E1F;--ink:#E9EAF2;--dim:#9BA0B8;--dusk:#F2A65A;--eclipse:#E4572E;
+  --meteor:#7FD8C4;--card:#151B3B;--line:#2A3158;--r:14px;--aura:#F2A65A;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--night);color:var(--ink);font-family:"Instrument Sans",system-ui,sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background-color 1.2s ease;
+  padding-bottom:calc(76px + env(safe-area-inset-bottom))}
+.wrap{max-width:640px;margin:0 auto;padding:0 18px}
+b{color:var(--ink);font-weight:600}
+
+/* ===== STICKY LIVE BAR ===== */
+.livebar{
+  position:fixed;bottom:0;left:0;right:0;z-index:50;
+  background:var(--skybar,rgba(10,14,31,.82));backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:background-color 1.2s ease;
+  border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom);
+}
+.livebar .wrap{display:flex;align-items:center;gap:14px;padding:10px 18px}
+.clock{font-family:"Fraunces",serif;font-size:26px;font-weight:600;letter-spacing:.01em;min-width:72px}
+.lang{flex:none;display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.lang button{font:600 11px "Instrument Sans",sans-serif;letter-spacing:.06em;color:var(--dim);
+  background:transparent;border:0;padding:6px 7px;cursor:pointer;transition:color .3s,background .3s}
+.lang button[aria-pressed="true"]{color:var(--night);background:var(--aura)}
+/* en móvil el selector le roba sitio al estado: se aprieta todo un poco */
+@media (max-width:420px){
+  .livebar .wrap{gap:9px;padding:10px 14px}
+  .clock{font-size:23px;min-width:62px}
+  .goto{padding:6px 10px}
+  .lang button{padding:6px 6px}
+}
+.live-dot{width:8px;height:8px;border-radius:50%;background:var(--aura);flex:none;box-shadow:0 0 10px 2px var(--aura);animation:pulse 2s ease-in-out infinite}
+.status{flex:1;min-width:0}
+.status .st-title{font-weight:600;font-size:13.5px;color:var(--aura);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color .6s}
+.status .st-next{font-size:12px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.goto{flex:none;font:600 12px "Instrument Sans",sans-serif;letter-spacing:.03em;color:var(--aura);
+  background:transparent;border:1px solid var(--aura);border-radius:999px;padding:6px 13px;cursor:pointer;
+  transition:color .6s,border-color .6s,background .2s}
+.goto:hover{background:rgba(255,255,255,.07)}
+.goto:active{transform:scale(.96)}
+/* ===== BRÚJULA · cinta HUD arriba (el borde superior del móvil es el puntero) ===== */
+.cpanel{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:640px;z-index:51;
+  padding:env(safe-area-inset-top) 0 0;overflow:hidden;
+  background:var(--skybar,rgba(10,14,31,.82));backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:1px solid var(--line);border-top:0;border-radius:0 0 var(--r) var(--r);
+  box-shadow:0 14px 34px -14px rgba(0,0,0,.75);transition:background-color 1.2s ease}
+.cpanel[hidden]{display:none}
+.ctape{display:block;width:100%;height:62px;opacity:.4;transition:opacity .5s ease}
+.cpanel.live .ctape{opacity:1}
+#ctapeg{transition:transform .12s linear}
+.ctape .tk{stroke:rgba(233,234,242,.32);stroke-width:1}
+.ctape .tkM{stroke:rgba(233,234,242,.75);stroke-width:1.5}
+.ctape .lbl{fill:var(--dim);font:600 10px "Instrument Sans",sans-serif;letter-spacing:.1em}
+/* nombre del paisaje: halo del color del cielo detrás del texto para que se lea sobre cualquier fondo */
+.ctape .lnd{fill:var(--meteor);font:600 11.5px "Instrument Sans",sans-serif;letter-spacing:.01em;
+  paint-order:stroke;stroke:var(--night);stroke-width:3.5px;stroke-linejoin:round}
+.ctape .lndp{fill:var(--meteor)}
+.ctape .avoid{fill:#B9BFD6}.ctape .avoidp{fill:#B9BFD6}
+.ctape .band{fill:var(--aura);opacity:.16;transition:opacity .4s ease}
+.cpanel.hit .band{opacity:.3}
+.lubl{stroke:var(--ink);stroke-width:1.5;transition:stroke .5s ease}
+.lubt{fill:var(--ink);transition:fill .5s ease}
+.cpanel.hit .lubl{stroke:var(--aura)}
+.cpanel.hit .lubt{fill:var(--aura);filter:drop-shadow(0 1px 7px var(--aura))}
+/* primero la acción (grande), después el dato de referencia (pequeño) */
+.cinfo{padding:7px 18px 0}
+.ct1{font-family:"Fraunces",serif;font-size:25px;font-weight:600;line-height:1.12;letter-spacing:-.01em}
+.ct1.ok{color:var(--aura)}
+.ct2{font-size:13px;color:#B9BFD6;margin-top:3px}
+.cread{display:flex;align-items:baseline;gap:9px;padding:7px 18px 11px;
+  font:600 11.5px "Instrument Sans",sans-serif;letter-spacing:.13em;color:var(--dim)}
+.cdeg{font-family:"Fraunces",serif;font-size:15px;letter-spacing:0;color:var(--ink);font-variant-numeric:tabular-nums}
+.cland{letter-spacing:.02em;color:var(--meteor);margin-left:auto;text-align:right;min-width:0}
+/* Chrome no deja vibrar hasta el primer toque en la página: se avisa y se quita solo */
+.cvib{border-top:1px solid var(--line);padding:8px 18px;font-size:11.5px;letter-spacing:.02em;color:var(--dim)}
+.cvib::before{content:"▚ ";color:var(--ink)}
+.cvib[hidden]{display:none}
+/* consejo flotante: cambia con la fase de la noche, y durante el eclipse es la regla de seguridad */
+.ctip{display:flex;gap:9px;align-items:flex-start;border-top:1px solid var(--line);
+  padding:9px 18px 11px;font-size:12.5px;color:#B9BFD6}
+.ctip .ci{flex:none;font-size:13px}
+.ctip b{color:var(--ink)}
+.ctip.rule{background:rgba(228,87,46,.16);border-top-color:rgba(228,87,46,.5);color:#FFD9CB}
+.ctip.rule b{color:#FF9C7A}
+#cperm[hidden]{display:none}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.5}}
+
+/* ===== HERO ===== */
+header{padding:30px 0 20px;background:transparent}
+.eyebrow{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--dusk);font-weight:600;margin-bottom:6px}
+h1{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(24px,5vw,32px);line-height:1.12}
+h1 em{font-style:italic;color:var(--dusk)}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;font-size:12px}
+.badge{padding:4px 11px;border-radius:999px;border:1px solid var(--line);color:var(--dim)}
+
+/* ===== TIMELINE ===== */
+.tl-section{padding:26px 0 40px}
+.tl{position:relative;padding-left:40px}
+.track{position:absolute;left:13px;top:0;bottom:0;width:3px;border-radius:3px;
+  background:linear-gradient(180deg,#7FB4E8,#F2C063 14%,#F2A65A 22%,#E4572E 30%,#8A4A9E 40%,#4A5488 52%,#1A2150 70%,#0A0E28)}
+.track-fill{position:absolute;left:13px;top:0;width:3px;border-radius:3px;background:rgba(233,234,242,.28);height:0;transition:height 1s ease}
+
+/* moving NOW marker */
+.now{position:absolute;left:0;top:0;width:100%;pointer-events:none;transform:translateY(-9999px);transition:transform 1s ease;z-index:5}
+.now-core{position:absolute;left:14.5px;top:0;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;
+  background:#fff;box-shadow:0 0 14px 3px var(--aura),0 0 40px 10px var(--aura);transition:box-shadow .6s}
+.now-ring{position:absolute;left:14.5px;top:0;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;
+  border:2px solid var(--aura);opacity:.7;animation:ripple 2.4s ease-out infinite;transition:border-color .6s}
+.now-ring.r2{animation-delay:1.2s}
+@keyframes ripple{0%{transform:scale(.35);opacity:.8}100%{transform:scale(1.5);opacity:0}}
+
+/* events */
+.ev{position:relative;margin-bottom:14px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:12px 15px;transition:opacity .6s,border-color .6s,box-shadow .6s,transform .6s,filter .4s ease}
+.dot{position:absolute;left:-33.5px;top:17px;width:16px;height:16px;border-radius:50%;border:3px solid var(--night);z-index:2;transition:box-shadow .6s}
+.d0{background:#7FB4E8}.d1{background:#F2C063}.d2{background:#F2A65A}.d3{background:#E4572E}
+.d4{background:#8A4A9E}.d5{background:#4A5488}.d6{background:#1A2150}.d7{background:#0E1440}
+.ev-h{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+.ev-time{font-family:"Fraunces",serif;font-size:17px;font-weight:600}
+.ev-title{font-weight:600;font-size:14px}
+.rows{margin-top:9px;display:grid;gap:6px}
+.row{display:flex;gap:10px;align-items:flex-start;background:rgba(255,255,255,.035);border:1px solid rgba(42,49,88,.55);border-radius:10px;padding:7px 10px}
+.ric{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:19px;line-height:1;flex:none;margin-top:1px}
+.rb{display:flex;flex-direction:column;gap:1px;min-width:0;flex:1}
+.rlbl{font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.rv{font-size:13px;color:var(--dim);line-height:1.45}
+.rv s{color:#8E93A8;text-decoration-thickness:1px}
+/* esquema del sitio: dónde queda el Sol desde la grada */
+.scene{margin-top:8px;background:rgba(255,255,255,.03);border:1px solid rgba(42,49,88,.7);border-radius:10px;padding:6px 8px 2px}
+.scene svg{display:block;width:100%;height:auto}
+.scene .mt{fill:#232A4E;stroke:#3A4270;stroke-width:1}
+.scene .stg{fill:#1B2246;stroke:#4A5488;stroke-width:1}
+.scene .gnd,.scene .std{stroke:#3A4270;stroke-width:1;fill:none}
+.scene .sun{fill:var(--dusk)}
+.scene .moon{fill:#141A38}
+.scene .glow{fill:var(--dusk);opacity:.16}
+.scene .los{stroke:var(--dusk);stroke-width:1.2;stroke-dasharray:3 3;fill:none;opacity:.75}
+.scene .losh{fill:var(--dusk)}
+.scene .you{fill:var(--ink)}
+.scene .lb{font:600 9px "Instrument Sans",sans-serif;fill:var(--dim);letter-spacing:.03em}
+.scene .sl{fill:var(--dusk)}
+.scene .yl{fill:var(--ink)}
+/* esquema visual: pictograma + dos palabras, para hacer sin leer parrafos */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:5px;margin-top:8px}
+.tile{display:flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,.045);border:1px solid rgba(42,49,88,.7);border-radius:9px;padding:7px 9px}
+.tile svg{width:25px;height:25px;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.tile svg .f{fill:currentColor;stroke:none}
+.tile svg .s{fill:currentColor;stroke:none;opacity:.45}
+.tile>span{font-size:11px;line-height:1.25;letter-spacing:.01em;color:var(--ink);font-weight:500}
+.r-w .ric{background:rgba(127,180,232,.16)} .r-w .rlbl{color:#7FB4E8}
+.r-m .ric{background:rgba(242,166,90,.16)}  .r-m .rlbl{color:#F2A65A}
+.r-h .ric{background:rgba(127,216,196,.14)} .r-h .rlbl{color:#7FD8C4}
+.r-f .ric{background:rgba(242,192,99,.16)}  .r-f .rlbl{color:#F2C063}
+.r-k .ric{background:rgba(237,147,177,.15)} .r-k .rlbl{color:#ED93B1}
+.ev.active .row{border-color:rgba(255,255,255,.14)}
+.tag{font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;border-radius:5px;padding:2px 7px}
+.tmax{background:var(--eclipse);color:#FFF1E8}.tpeak{background:var(--meteor);color:#06251D}
+
+/* states driven by JS */
+.ev.past{opacity:.38}
+/* de noche todo lo que no es "ahora" se apaga y se desatura: menos luz en la cara mientras se miran fugaces */
+body.night .ev:not(.active){filter:grayscale(.9)}
+body.night .ev:not(.active):not(.past){opacity:.42}
+body.night .ev:not(.active):not(:hover):not(:active) .tag{background:#4A5070;color:#D7DAEA}
+/* al pasar por encima (o al tocar) vuelve a color y a opacidad plena: para repasar lo que viene sin esperar */
+body.night .ev:hover,body.night .ev:active,.ev:hover,.ev:active{filter:none;opacity:1}
+.ev.past .ev-title::after{content:" ✓";color:var(--meteor)}
+.ev.active{border-color:var(--aura);transform:scale(1.015);
+  box-shadow:0 0 0 1px var(--aura),0 0 28px -4px var(--aura);}
+.ev.active .dot{box-shadow:0 0 12px 3px var(--aura)}
+/* ===== DEMO ===== */
+.demo{margin-top:26px;background:var(--card);border:1px dashed var(--line);border-radius:var(--r);padding:12px 15px;font-size:12.5px;color:var(--dim)}
+.demo-top{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.demo input[type=checkbox]{accent-color:var(--dusk)}
+.demo input[type=range]{width:100%;accent-color:var(--dusk)}
+.demo .dt{font-family:"Fraunces",serif;font-size:15px;color:var(--ink);min-width:52px;text-align:right}
+
+#sky{position:fixed;inset:0;z-index:0;pointer-events:none}
+header,section,footer{position:relative;z-index:1}
+footer{padding:20px 0 34px;color:var(--dim);font-size:12.5px;text-align:center;border-top:1px solid var(--line)}
+footer .wish{font-family:"Fraunces",serif;font-style:italic;font-size:16px;color:var(--ink)}
+footer .made{margin-top:12px;letter-spacing:.02em}
+footer .made a{color:var(--ink);text-decoration:underline;text-decoration-color:rgba(233,234,242,.4);text-underline-offset:3px;transition:color .3s}
+footer .made a:hover{color:var(--aura);text-decoration-color:var(--aura)}
+@media (prefers-reduced-motion: reduce){
+  .now-ring,.live-dot,  .now,.track-fill,.ev,#ctapeg,.ctape{transition:none}
+}
+</style>
+</head>
+<body>
+<canvas id="sky" aria-hidden="true"></canvas>
+
+<!-- pictogramas del esquema del máximo: un solo trazo, tamaño 24 -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="i-luz" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="5.2"/>
+    <path class="f" d="M12 6.8a5.2 5.2 0 0 0 0 10.4z"/>
+    <path d="M12 1.8v2.4M12 19.8v2.4M1.8 12h2.4M19.8 12h2.4M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M19.1 4.9l-1.7 1.7M6.6 17.4l-1.7 1.7"/>
+  </symbol>
+  <symbol id="i-sombra" viewBox="0 0 24 24">
+    <path d="M10 4.5h3.4v11H10z"/>
+    <path class="s" d="M13.4 15.5 21 19.5H10z"/>
+    <path d="M2.5 19.5h19"/>
+  </symbol>
+  <symbol id="i-lunas" viewBox="0 0 24 24">
+    <path d="M7.5 6.5a4.8 4.8 0 1 0 0 9.6 6 6 0 0 1 0-9.6z"/>
+    <path d="M16.6 12.4a3.4 3.4 0 1 0 0 6.8 4.3 4.3 0 0 1 0-6.8z"/>
+    <path d="M18 3.4a2.5 2.5 0 1 0 0 5 3.2 3.2 0 0 1 0-5z"/>
+  </symbol>
+  <symbol id="i-venus" viewBox="0 0 24 24">
+    <path d="M12 2.6 13.7 9l6.4 1.7-6.4 1.7L12 18.8l-1.7-6.4L3.9 10.7 10.3 9z"/>
+    <path d="M18.6 17.4v3.4M16.9 19.1h3.4"/>
+  </symbol>
+  <symbol id="i-ave" viewBox="0 0 24 24">
+    <path d="M2.6 14.4q3.7-6 7.4 0M10 14.4q3.7-6 7.4 0"/>
+    <path d="M19.4 8.2h2.2"/>
+  </symbol>
+  <symbol id="i-foto" viewBox="0 0 24 24">
+    <path d="M3 8.4h3.6l1.5-2.2h7.8l1.5 2.2H21v10.2H3z"/>
+    <circle cx="12" cy="13.4" r="3.1"/>
+  </symbol>
+</defs></svg>
+
+<div class="cpanel" id="cpanel">
+  <svg class="ctape" id="ctape" viewBox="0 0 376 62" aria-hidden="true">
+    <defs>
+      <linearGradient id="tfade" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#000"/><stop offset=".11" stop-color="#fff"/>
+        <stop offset=".89" stop-color="#fff"/><stop offset="1" stop-color="#000"/>
+      </linearGradient>
+      <mask id="tmask" maskUnits="userSpaceOnUse" x="0" y="0" width="376" height="62">
+        <rect id="tmaskr" width="376" height="62" fill="url(#tfade)"/>
+      </mask>
+    </defs>
+    <g mask="url(#tmask)"><g id="ctapeg"></g></g>
+    <path class="lubt" id="clubt" d="M181 0 H195 L188 9 Z"/>
+    <line class="lubl" id="clubl" x1="188" y1="0" x2="188" y2="30"/>
+  </svg>
+  <div class="cinfo">
+    <div class="ct1" id="ct1" data-es="Activa la brújula">Activa la brúixola</div>
+    <div class="ct2" id="ct2" data-es="Móvil en vertical: el borde de arriba es tu puntero. Gira sobre ti.">Mòbil en vertical: la vora de dalt és el teu punter. Gira sobre tu.</div>
+    <button class="goto" id="cperm" type="button" style="margin-top:8px;margin-bottom:2px" data-es="Activar sensores">Activar sensors</button>
+  </div>
+  <div class="cread">
+    <span class="cdeg" id="cdeg">—</span>
+    <span class="ccard" id="ccard" data-es="BRÚJULA">BRÚIXOLA</span>
+    <span class="cland" id="cland"></span>
+  </div>
+  <div class="cvib" id="cvib" hidden data-es="Toca la pantalla una vez para activar el aviso por vibración">Toca la pantalla un cop per activar l'avís per vibració</div>
+  <div class="ctip" id="ctip"></div>
+</div>
+
+<div class="livebar">
+  <div class="wrap">
+    <span class="live-dot"></span>
+    <div class="clock" id="clock">--:--</div>
+    <div class="status">
+      <div class="st-title" id="stTitle" data-es="Cargando la noche…">Carregant la nit…</div>
+      <div class="st-next" id="stNext"></div>
+    </div>
+    <button class="goto" id="gotoNow" type="button" data-es="⌖ Ahora">⌖ Ara</button>
+    <div class="lang" role="group" aria-label="Idioma">
+      <button type="button" id="langCa" aria-pressed="true">CA</button>
+      <button type="button" id="langEs" aria-pressed="false">ES</button>
+    </div>
+  </div>
+</div>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow" data-es="Miércoles 12 agosto 2026 · Sabadell · en directo">Dimecres 12 d'agost 2026 · Sabadell · en directe</p>
+    <h1 data-es="Tarde de eclipse, noche de <em>estrellas fugaces</em>">Tarda d'eclipsi, nit d'<em>estrelles fugaces</em></h1>
+    <div class="badges">
+      <span class="badge" data-es="🌤 Despejado">🌤 Serè</span>
+      <span class="badge" data-es="🌡 Noche 23–24 °C">🌡 Nit 23–24 °C</span>
+      <span class="badge" data-es="🌑 Luna nueva">🌑 Lluna nova</span>
+    </div>
+  </div>
+</header>
+
+<section class="tl-section">
+  <div class="wrap">
+    <div class="tl" id="tl">
+      <div class="track"></div>
+      <div class="track-fill" id="fill"></div>
+      <div class="now" id="now">
+        <span class="now-ring"></span><span class="now-ring r2"></span>
+        <span class="now-core"></span>
+      </div>
+
+      <div class="ev" data-min="30" data-color="#7FB4E8"><span class="dot d0"></span>
+        <div class="ev-h"><span class="ev-time">18:30</span><span class="ev-title" data-es="Salir de casa">Sortir de casa</span></div>
+        
+        <div class="rows">
+          <div class="row r-h"><span class="ric">✦</span><span class="rb"><span class="rlbl" data-es="Qué hacer">Què fer</span><span class="rv" data-es="Revisar mochila: <b>gafas de eclipse</b>, esterilla, agua, picnic, chaqueta, antimosquitos">Revisar la motxilla: <b>ulleres d'eclipsi</b>, estora, aigua, pícnic, jaqueta, antimosquits</span></span></div>
+        </div>
+      
+      </div>
+
+      <div class="ev" data-min="60" data-color="#F2C063"><span class="dot d1"></span>
+        <div class="ev-h"><span class="ev-time">19:00</span><span class="ev-title" data-es="Anfiteatro · elegir sitio">Amfiteatre · triar lloc</span></div>
+        
+        <div class="rows">
+          <div class="row r-w"><span class="ric">📍</span><span class="rb"><span class="rlbl" data-es="Dónde">On</span><span class="rv" data-es="Anfiteatro del Parc Catalunya, en la grada, <b>mirando al escenario</b>">Amfiteatre del Parc Catalunya, a la graderia, <b>mirant a l'escenari</b></span></span></div>
+          <div class="row r-m"><span class="ric">👁</span><span class="rb"><span class="rlbl">Mirar</span><span class="rv" data-es="Mirando al escenario, <b>un poco a la derecha</b> y por encima: los picos dentados de <b>Montserrat</b>. Que no haya árboles ni edificios delante">Mirant a l'escenari, <b>una mica a la dreta</b> i per damunt: els cims dentats de <b>Montserrat</b>. Que no hi hagi arbres ni edificis al davant</span></span></div>
+          <div class="row r-h"><span class="ric">✦</span><span class="rb"><span class="rlbl" data-es="Qué hacer">Què fer</span><span class="rv" data-es="Si algo estorba la vista, sube a la zona alta del parque">Si alguna cosa fa nosa, puja a la zona alta del parc</span></span></div>
+        </div>
+      
+      </div>
+
+      <div class="ev" data-min="95" data-color="#F2A65A"><span class="dot d2"></span>
+        <div class="ev-h"><span class="ev-time">19:35</span><span class="ev-title" data-es="Empieza el eclipse">Comença l'eclipsi</span></div>
+        
+        <div class="rows">
+          <div class="row r-m"><span class="ric">👁</span><span class="rb"><span class="rlbl">Mirar</span><span class="rv" data-es="Al Sol, <b>solo con gafas</b>: la Luna le va dando mordiscos">Al Sol, <b>només amb ulleres</b>: la Lluna li va fent queixalades</span></span></div>
+          <div class="row r-h"><span class="ric">✦</span><span class="rb"><span class="rlbl" data-es="Qué hacer">Què fer</span><span class="rv" data-es="Vistazos cortos cada 5–10 min; entre medias, nota la luz cada vez más rara">Cops d'ull curts cada 5–10 min; entremig, fixa't com la llum es torna estranya</span></span></div>
+          <div class="row r-f"><span class="ric">📷</span><span class="rb"><span class="rlbl">Foto</span><span class="rv" data-es="Sombras de las hojas: mini medias lunas en el suelo">Ombres de les fulles: mini mitges llunes a terra</span></span></div>
+        </div>
+      
+      </div>
+
+      <div class="ev" data-min="149" data-color="#E4572E"><span class="dot d3"></span>
+        <div class="ev-h"><span class="ev-time">20:29</span><span class="ev-title" data-es="Máximo · 99%">Màxim · 99%</span><span class="tag tmax" data-es="El momento">El moment</span></div>
+        
+        <div class="rows">
+          <div class="row r-m"><span class="ric">👁</span><span class="rb"><span class="rlbl" data-es="Con gafas · al Sol">Amb ulleres · al Sol</span><span class="rv" data-es="Desde tu sitio, por encima del escenario: <b>gafas puestas</b>, vistazos cortos">Des del teu lloc, per damunt de l'escenari: <b>ulleres posades</b>, cops d'ull curts</span></span></div>
+
+          <figure class="scene">
+            <svg viewBox="0 0 240 106" role="img" aria-label="Desde la grada del anfiteatro, mirando por encima del escenario: el Sol eclipsado está justo sobre la silueta de Montserrat, un poco a la derecha.">
+              <!-- Montserrat -->
+              <path class="mt" d="M100 84 L112 73 Q117 60 123 71 Q129 52 136 67 Q142 45 150 63 Q157 50 163 65 Q170 54 177 67 Q184 57 190 71 Q198 63 205 75 L220 80 L236 84 Z"/>
+              <!-- Sol eclipsado al 99%: queda una rayita finísima -->
+              <circle class="glow" cx="176" cy="36" r="14"/>
+              <circle class="sun" cx="176" cy="36" r="8.5"/>
+              <circle class="moon" cx="177.2" cy="35" r="8.5"/>
+              <!-- escenario -->
+              <path class="stg" d="M70 84 L78 72 H146 L154 84 Z"/>
+              <line class="gnd" x1="4" y1="84" x2="236" y2="84"/>
+              <!-- grada, tres filas -->
+              <path class="std" d="M26 92H214M16 98H224M6 104H234"/>
+              <!-- línea de visión desde tu sitio -->
+              <path class="los" d="M120 91 L168 44"/>
+              <path class="losh" d="M164 42 l7 -2 -2 7z"/>
+              <circle class="you" cx="120" cy="92" r="3.2"/>
+              <text class="lb yl" x="128" y="95" data-es="tú">tu</text>
+              <text class="lb" x="112" y="81" text-anchor="middle" data-es="escenario">escenari</text>
+              <text class="lb" x="232" y="79" text-anchor="end">Montserrat</text>
+              <text class="lb sl" x="176" y="16" text-anchor="middle">el Sol, aquí</text>
+            </svg>
+          </figure>
+          <div class="row r-h"><span class="ric">✦</span><span class="rb"><span class="rlbl" data-es="Sin gafas · el entorno">Sense ulleres · l'entorn</span>
+            <div class="tiles">
+              <span class="tile"><svg><use href="#i-luz"/></svg><span data-es="Luz gris, no noche">Llum grisa, no nit</span></span>
+              <span class="tile"><svg><use href="#i-sombra"/></svg><span data-es="Sombras afiladas">Ombres afilades</span></span>
+              <span class="tile"><svg><use href="#i-lunas"/></svg><span data-es="Medias lunas en el suelo">Mitges llunes a terra</span></span>
+              <span class="tile"><svg><use href="#i-venus"/></svg><span data-es="Venus, arriba a la izq.">Venus, amunt a l'esq.</span></span>
+              <span class="tile"><svg><use href="#i-ave"/></svg><span data-es="Los pájaros cambian">Els ocells canvien</span></span>
+              <span class="tile"><svg><use href="#i-foto"/></svg><span data-es="Foto al ambiente">Foto a l'ambient</span></span>
+            </div></span></div>
+          <div class="row r-k"><span class="ric">💡</span><span class="rb"><span class="rlbl" data-es="No lo busques">No ho busquis</span><span class="rv" data-es="<s>corona</s> <s>anillo de diamante</s> — solo en la franja total, al sur"><s>corona</s> <s>anell de diamant</s> — només a la franja total, al sud</span></span></div>
+        </div>
+      
+      </div>
+
+      <div class="ev" data-min="174" data-color="#8A4A9E"><span class="dot d4"></span>
+        <div class="ev-h"><span class="ev-time">20:54</span><span class="ev-title" data-es="Fin del eclipse · atardecer">Fi de l'eclipsi · capvespre</span></div>
+
+        <div class="rows">
+          <div class="row r-h"><span class="ric">✦</span><span class="rb"><span class="rlbl" data-es="Qué hacer">Què fer</span><span class="rv" data-es="Guardad las gafas y quedaos al crepúsculo un rato: el cielo se pone intenso detrás de Montserrat">Guardeu les ulleres i quedeu-vos al crepuscle una estona: el cel es posa intens darrere de Montserrat</span></span></div>
+          <div class="row r-f"><span class="ric">📷</span><span class="rb"><span class="rlbl">Foto</span><span class="rv" data-es="La silueta de Montserrat contra el cielo naranja">La silueta de Montserrat contra el cel taronja</span></span></div>
+        </div>
+
+      </div>
+
+      <div class="ev" data-min="210" data-color="#E8A0B4"><span class="dot d4"></span>
+        <div class="ev-h"><span class="ev-time">21:30</span><span class="ev-title" data-es="Cenar algo">Sopar alguna cosa</span></div>
+
+        <div class="rows">
+          <div class="row r-w"><span class="ric">🍽</span><span class="rb"><span class="rlbl" data-es="Dónde">On</span><span class="rv" data-es="Por Sabadell, de camino al campo. O picnic allí si lo lleváis hecho">Per Sabadell, de camí al camp. O pícnic allà si el porteu fet</span></span></div>
+          <div class="row r-h"><span class="ric">✦</span><span class="rb"><span class="rlbl" data-es="Qué hacer">Què fer</span><span class="rv" data-es="Cena ligera y sin alargarla: a las 22:30 toca instalarse. Llenad la botella de agua">Sopar lleuger i sense allargar-lo: a les 22:30 toca instal·lar-se. Ompliu l'ampolla d'aigua</span></span></div>
+          <div class="row r-k"><span class="ric">💡</span><span class="rb"><span class="rlbl" data-es="Clave">Clau</span><span class="rv" data-es="Chaqueta a mano: en el campo, quieto y de noche, se refresca aunque el día haya sido de 30°">Jaqueta a mà: al camp, quiet i de nit, refresca encara que el dia hagi estat de 30°</span></span></div>
+        </div>
+
+      </div>
+
+      <div class="ev" data-min="270" data-color="#4A5488"><span class="dot d5"></span>
+        <div class="ev-h"><span class="ev-time">22:30</span><span class="ev-title" data-es="El campo · instalarse">El camp · instal·lar-se</span></div>
+        
+        <div class="rows">
+          <div class="row r-w"><span class="ric">📍</span><span class="rb"><span class="rlbl" data-es="Dónde">On</span><span class="rv" data-es="El campo de siempre">El camp de sempre</span></span></div>
+          <div class="row r-h"><span class="ric">✦</span><span class="rb"><span class="rlbl" data-es="Qué hacer">Què fer</span><span class="rv" data-es="Esterillas con los <b>pies hacia el Montseny</b> (macizo grande al NE), espalda a Sabadell">Estores amb els <b>peus cap al Montseny</b> (el massís gran al NE), esquena a Sabadell</span></span></div>
+          <div class="row r-k"><span class="ric">💡</span><span class="rb"><span class="rlbl" data-es="Clave">Clau</span><span class="rv" data-es="Móviles fuera: los ojos tardan 20–30 min en adaptarse">Mòbils fora: els ulls tarden 20–30 min a adaptar-se</span></span></div>
+        </div>
+      
+      </div>
+
+      <div class="ev" data-min="300" data-color="#7FD8C4"><span class="dot d6"></span>
+        <div class="ev-h"><span class="ev-time">23:00</span><span class="ev-title" data-es="Primeras fugaces">Primeres fugaces</span></div>
+        
+        <div class="rows">
+          <div class="row r-m"><span class="ric">👁</span><span class="rb"><span class="rlbl">Mirar</span><span class="rv" data-es="Encima de <b>La Mola</b> (la montaña de la ermita plana, al norte), a media altura">Damunt de <b>La Mola</b> (la muntanya de l'ermita plana, al nord), a mitja alçada</span></span></div>
+          <div class="row r-h"><span class="ric">✦</span><span class="rb"><span class="rlbl" data-es="Qué hacer">Què fer</span><span class="rv" data-es="Mirada relajada, sin fijar la vista: se cazan de reojo. «Nacen» sobre el <b>Montseny</b>">Mirada relaxada, sense fixar la vista: es cacen de cua d'ull. «Neixen» sobre el <b>Montseny</b></span></span></div>
+        </div>
+      
+      </div>
+
+      <div class="ev" data-min="420" data-end="540" data-color="#7FD8C4"><span class="dot d7"></span>
+        <div class="ev-h"><span class="ev-time">01:00–03:00</span><span class="ev-title" data-es="Pico de Perseidas">Pic de Perseides</span><span class="tag tpeak" data-es="Lo mejor">El millor</span></div>
+        
+        <div class="rows">
+          <div class="row r-m"><span class="ric">👁</span><span class="rb"><span class="rlbl">Mirar</span><span class="rv" data-es="El arco de cielo <b>entre La Mola y el Montseny</b>, bien arriba">L'arc de cel <b>entre La Mola i el Montseny</b>, ben amunt</span></span></div>
+          <div class="row r-h"><span class="ric">✦</span><span class="rb"><span class="rlbl" data-es="Qué hacer">Què fer</span><span class="rv" data-es="Una cada 1–3 min, a rachas: manta, paciencia y a contar. Pide un deseo con la primera ✨">Una cada 1–3 min, a estones: manta, paciència i a comptar. Demana un desig amb la primera ✨</span></span></div>
+          <div class="row r-f"><span class="ric">📷</span><span class="rb"><span class="rlbl">Foto</span><span class="rv" data-es="Modo noche 3–10 s, móvil apoyado apuntando sobre La Mola">Mode nit 3–10 s, mòbil recolzat apuntant sobre La Mola</span></span></div>
+        </div>
+      
+      </div>
+    </div>
+
+    <div class="demo">
+      <div class="demo-top">
+        <label style="display:flex;gap:7px;align-items:center;cursor:pointer">
+          <input type="checkbox" id="demoOn"> <span data-es="Previsualizar la noche">Previsualitzar la nit</span>
+        </label>
+        <span class="dt" id="demoTime">18:00</span>
+      </div>
+      <input type="range" id="demoRange" min="0" max="600" value="0" step="5" disabled>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="wish" data-es="&quot;Pide un deseo con la primera.&quot;">«Demana un desig amb la primera.»</p>
+    <p data-es="Eclipse casi total + Perseidas con Luna nueva. No se repetirá en muchos años.">Eclipsi gairebé total + Perseides amb Lluna nova. No es repetirà en molts anys.</p>
+    <p class="made" data-es="Hecho por <a href=&quot;https://www.linkedin.com/in/osanchezroca/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Oscar</a> + Claude">Fet per <a href="https://www.linkedin.com/in/osanchezroca/" target="_blank" rel="noopener">Oscar</a> + Claude</p>
+  </div>
+</footer>
+
+<script>
+/* ===== IDIOMA: catalán por defecto, castellano en data-es ===== */
+(function(){
+  var D = {
+    ca:{title:'Eclipsi + Perseides · Sabadell · en directe', gotoT:'Anar al moment actual',
+      start:'La nit comença a les 18:30', falta:'Falten ', mochila:' · prepara la motxilla 🎒',
+      prep:'Prepara la motxilla 🎒', fin:'Fi de la nit — a dormir 🌙', deseo:'Esperem que hagis demanat el desig',
+      ahora:'Ara: ', sig:'Següent: ', en:' · en ', hasta3:'Fins a les 03:00 · com més tard, més fugaces',
+      go1:"Vés a l'amfiteatre", go2:'Vés al camp',
+      to2:'Cap al Sol sobre Montserrat', at2:'Estàs mirant cap al Sol sobre Montserrat.',
+      to4:'Cap al cel entre La Mola i el Montseny', at4:'Estàs mirant cap al cel entre La Mola i el Montseny.',
+      tip1:"Graderia mirant a l'escenari. Quan arribis, la brúixola et marca on surt l'eclipsi.",
+      tip2:'Ulleres posades per mirar.',
+      tip3:"Sopeu de camí. Quan arribis, la brúixola et marca l'arc de les fugaces.",
+      tip4:'Mira a mitja alçada, mirada relaxada.',
+      ahi:'✓ Aquí és!',
+      girad:'Gira ', dcha:'° a la dreta →', izq:'← Gira ', izqf:"° a l'esquerra",
+      hacia:'cap a ', evita:'evita ', buscando:'Buscant el nord…',
+      puntero:'Mòbil en vertical: la vora de dalt és el teu punter.',
+      cardBusc:'BUSCANT', cardSin:'SENSE SENYAL', sinSenal:'Sense senyal de brúixola',
+      sinSenal2:"El teu dispositiu no exposa l'orientació (normal a l'ordinador). Al mòbil funcionarà.",
+      permNo:'Permís denegat', permNo2:"Activa'l als ajustos del Safari per fer servir la brúixola.",
+      permErr:"No s'ha pogut demanar permís", permErr2:'Obre la pàgina des de https al mòbil.',
+      p1h:'Ulleres ISO 12312‑2 abans de mirar', p1t:'Ni un segon mirant el Sol sense elles. Les ulleres de sol no valen.',
+      p2h:'Única regla', p2t:"No miris mai el Sol sense ulleres d'eclipsi certificades (ISO 12312‑2). Ni un segon, ni amb ulleres de sol. Fa mal a la vista sense dolor.",
+      p3h:'Mòbil guardat 30 min', p3t:'Els ulls tarden 20–30 min a adaptar-se a la foscor. És el secret nº 1.',
+      p4h:'Mirada relaxada, sense fixar la vista', p4t:"Peus cap al Montseny i es cacen de cua d'ull. Vénen a estones, més després de la 1:00."},
+    es:{title:'Eclipse + Perseidas · Sabadell · en directo', gotoT:'Ir al momento actual',
+      start:'La noche empieza a las 18:30', falta:'Faltan ', mochila:' · prepara la mochila 🎒',
+      prep:'Prepara la mochila 🎒', fin:'Fin de la noche — a dormir 🌙', deseo:'Esperamos que hayas pedido tu deseo',
+      ahora:'Ahora: ', sig:'Siguiente: ', en:' · en ', hasta3:'Hasta las 03:00 · cuanto más tarde, más fugaces',
+      go1:'Dirígete al anfiteatro', go2:'Dirígete al campo',
+      to2:'Hacia el Sol sobre Montserrat', at2:'Estás mirando hacia el Sol sobre Montserrat.',
+      to4:'Hacia el cielo entre La Mola y el Montseny', at4:'Estás mirando hacia el cielo entre La Mola y el Montseny.',
+      tip1:'Grada mirando al escenario. Al llegar, la brújula te marca dónde sale el eclipse.',
+      tip2:'Gafas puestas para mirar.',
+      tip3:'Cenad de camino. Al llegar, la brújula te marca el arco de las fugaces.',
+      tip4:'Mira a media altura, mirada relajada.',
+      ahi:'✓ ¡Ahí es!',
+      girad:'Gira ', dcha:'° a la derecha →', izq:'← Gira ', izqf:'° a la izquierda',
+      hacia:'hacia ', evita:'evita ', buscando:'Buscando el norte…',
+      puntero:'Móvil en vertical: el borde de arriba es tu puntero.',
+      cardBusc:'BUSCANDO', cardSin:'SIN SEÑAL', sinSenal:'Sin señal de brújula',
+      sinSenal2:'Tu dispositivo no expone la orientación (normal en ordenador). En el móvil funcionará.',
+      permNo:'Permiso denegado', permNo2:'Actívalo en ajustes de Safari para usar la brújula.',
+      permErr:'No se pudo pedir permiso', permErr2:'Abre la página desde https en el móvil.',
+      p1h:'Gafas ISO 12312‑2 antes de mirar', p1t:'Ni un segundo mirando al Sol sin ellas. Las gafas de sol no valen.',
+      p2h:'Única regla', p2t:'Nunca mires al Sol sin gafas de eclipse certificadas (ISO 12312‑2). Ni un segundo, ni con gafas de sol. Daña la vista sin dolor.',
+      p3h:'Móvil guardado 30 min', p3t:'Los ojos tardan 20–30 min en adaptarse a la oscuridad. Es el secreto nº 1.',
+      p4h:'Mirada relajada, sin fijar la vista', p4t:'Pies hacia el Montseny y se cazan de reojo. Vienen a rachas, más tras la 1:00.'}
+  };
+  var L = 'ca';
+  try { var st = localStorage.getItem('lang'); if (st === 'es' || st === 'ca') L = st; } catch(e){}
+  window.__lang = function(){ return L; };
+  window.T = function(k){ return (D[L][k] != null) ? D[L][k] : D.ca[k]; };
+  window.__i18n = [];   // cada motor registra aquí su repintado
+  function apply(l){
+    L = l;
+    try { localStorage.setItem('lang', l); } catch(e){}
+    document.documentElement.lang = l;
+    document.title = window.T('title');
+    var g = document.getElementById('gotoNow');
+    if (g) g.title = window.T('gotoT');
+    // el HTML original está escrito en catalán: la primera vez se guarda en data-ca
+    var els = document.querySelectorAll('[data-es]');
+    for (var i=0;i<els.length;i++){
+      var el = els[i];
+      if (el.getAttribute('data-ca') == null) el.setAttribute('data-ca', el.innerHTML);
+      el.innerHTML = (l === 'es') ? el.getAttribute('data-es') : el.getAttribute('data-ca');
+    }
+    var bca = document.getElementById('langCa'), bes = document.getElementById('langEs');
+    if (bca) bca.setAttribute('aria-pressed', String(l === 'ca'));
+    if (bes) bes.setAttribute('aria-pressed', String(l === 'es'));
+    for (var j=0;j<window.__i18n.length;j++) window.__i18n[j]();
+  }
+  window.__setLang = apply;
+  document.addEventListener('DOMContentLoaded', function(){
+    document.getElementById('langCa').addEventListener('click', function(){ apply('ca'); });
+    document.getElementById('langEs').addEventListener('click', function(){ apply('es'); });
+    apply(L);
+  });
+})();
+</script>
+<script>
+(function(){
+  var tl = document.getElementById('tl');
+  var evs = Array.prototype.slice.call(document.querySelectorAll('.ev'));
+  var now = document.getElementById('now');
+  var fill = document.getElementById('fill');
+  var clock = document.getElementById('clock');
+  var stTitle = document.getElementById('stTitle');
+  var stNext = document.getElementById('stNext');
+  var demoOn = document.getElementById('demoOn');
+  var demoRange = document.getElementById('demoRange');
+  var demoTime = document.getElementById('demoTime');
+
+  // timeline spans 18:00 (min 0) -> 04:00 (min 600)
+  function nowInfo(){
+    var d = new Date(), h = d.getHours(), base = h*60 + d.getMinutes();
+    if (h >= 18) return {min: base - 1080, pre: false};      // 18:00-23:59
+    if (h < 4)   return {min: base + 360,  pre: false};      // 00:00-03:59
+    return {min: 30, pre: true, until: 1110 - base};         // daytime: preview of 18:30
+  }
+  function clockNow(){
+    var d = new Date(), h = d.getHours(), m = d.getMinutes();
+    return (h<10?'0':'')+h+':'+(m<10?'0':'')+m;
+  }
+  function fmt(min){
+    var t = (18*60 + min) % (24*60);
+    var h = Math.floor(t/60), mm = t%60;
+    return (h<10?'0':'')+h+':'+(mm<10?'0':'')+mm;
+  }
+  function dotY(ev){
+    var dot = ev.querySelector('.dot');
+    return ev.offsetTop + dot.offsetTop + dot.offsetHeight/2;
+  }
+  function yFor(min){
+    var first = evs[0], last = evs[evs.length-1];
+    var fMin = +first.dataset.min, lMin = +(last.dataset.end || last.dataset.min);
+    if (min <= fMin) {
+      var y0 = dotY(first);
+      return Math.max(6, y0 - (fMin - min) * 0.8);
+    }
+    for (var i = 0; i < evs.length - 1; i++){
+      var a = +evs[i].dataset.min, b = +evs[i+1].dataset.min;
+      if (min >= a && min < b){
+        var ya = dotY(evs[i]), yb = dotY(evs[i+1]);
+        return ya + (yb - ya) * (min - a) / (b - a);
+      }
+    }
+    var yl = dotY(last);
+    if (min < lMin) return yl + Math.min(30, (min - (+last.dataset.min)) * 0.25);
+    return Math.min(tl.offsetHeight - 6, yl + 34);
+  }
+  function activeIndex(min){
+    var idx = -1;
+    for (var i = 0; i < evs.length; i++){
+      if (min >= +evs[i].dataset.min) idx = i;
+    }
+    return idx;
+  }
+  // Háptica compartida con la brújula.
+  // ponytail: navigator.vibrate solo existe en Android/Chrome y exige un gesto previo; iOS no expone vibración web, allí el feedback es solo visual.
+  window.__buzz = function(p){ if (navigator.vibrate){ try { navigator.vibrate(p); } catch(e){} } };
+
+  var lastIdx = null;
+  function update(){
+    var demo = demoOn.checked;
+    var info = nowInfo();
+    var pre = !demo && info.pre;
+    var min = demo ? +demoRange.value : info.min;
+    clock.textContent = demo ? fmt(min) : clockNow();
+    demoTime.textContent = fmt(demo ? min : Math.max(0, Math.min(600, min)));
+
+    var idx = activeIndex(min);
+    var lastEnd = +(evs[evs.length-1].dataset.end || evs[evs.length-1].dataset.min);
+
+    evs.forEach(function(ev, i){
+      ev.classList.toggle('past', i < idx || (i === idx && i === evs.length-1 && min > lastEnd));
+      ev.classList.toggle('active', i === idx && !(i === evs.length-1 && min > lastEnd));
+    });
+
+    // arranca un evento: doble pulso (no en el slider de previsualización ni al cargar)
+    if (!demo){
+      if (lastIdx !== null && idx !== lastIdx && idx >= 0) window.__buzz([90,70,150]);
+      lastIdx = idx;
+    }
+
+    if (min < 0 || min > 660){
+      now.style.transform = 'translateY(-9999px)';
+      fill.style.height = '0px';
+    } else {
+      var y = yFor(Math.max(0, Math.min(600, min)));
+      now.style.transform = 'translateY(' + y + 'px)';
+      fill.style.height = y + 'px';
+    }
+
+    var aura = (idx >= 0 && evs[idx]) ? evs[idx].dataset.color : '#F2A65A';
+    document.documentElement.style.setProperty('--aura', aura);
+    applySky(min < 30 ? 30 : min);
+    window.__nightMin = min < 30 ? 30 : min;
+    document.body.classList.toggle('night', !pre && min >= 270); // 22:30 en adelante ya es noche cerrada
+
+    // status text
+    if (pre){
+      stTitle.textContent = T('start');
+      stTitle.style.color = '';
+      stNext.textContent = T('falta') + hm(info.until) + T('mochila');
+    } else if (idx < 0){
+      stTitle.textContent = T('start');
+      stTitle.style.color = '';
+      var d1 = (+evs[0].dataset.min) - min;
+      stNext.textContent = d1 > 0 ? T('falta') + hm(d1) : T('prep');
+    } else if (idx === evs.length-1 && min > lastEnd){
+      stTitle.textContent = T('fin');
+      stNext.textContent = T('deseo');
+    } else {
+      var t = evs[idx].querySelector('.ev-title').textContent.replace(' ✓','');
+      stTitle.textContent = T('ahora') + t;
+      stTitle.style.color = aura;
+      if (idx < evs.length-1){
+        var nx = evs[idx+1];
+        var dm = (+nx.dataset.min) - min;
+        stNext.textContent = T('sig') + nx.querySelector('.ev-time').textContent + ' ' +
+          nx.querySelector('.ev-title').textContent + T('en') + hm(dm);
+      } else {
+        stNext.textContent = T('hasta3');
+      }
+    }
+  }
+  // ===== SKY SIMULATION =====
+  // [minute, hex] — 18:00 blue afternoon -> golden -> DIP at eclipse max -> sunset purple -> dusk -> PURE BLACK for Perseids
+  var SKY = [
+    [-60,'#4A6B9E'], [0,'#46628F'], [60,'#4C6890'], [95,'#6B5844'], [130,'#54413E'],
+    [143,'#2A2233'], [149,'#0E0B16'], [156,'#2E2438'], [174,'#4A2E4E'],
+    [200,'#2A2044'], [240,'#141833'], [285,'#05060D'], [300,'#000000'], [660,'#000000']
+  ];
+  function hx(c){ return [parseInt(c.substr(1,2),16), parseInt(c.substr(3,2),16), parseInt(c.substr(5,2),16)]; }
+  function lerpSky(min){
+    if (min <= SKY[0][0]) return SKY[0][1];
+    for (var i=0;i<SKY.length-1;i++){
+      var a=SKY[i], b=SKY[i+1];
+      if (min>=a[0] && min<=b[0]){
+        var t=(min-a[0])/(b[0]-a[0]||1), ca=hx(a[1]), cb=hx(b[1]);
+        var r=Math.round(ca[0]+(cb[0]-ca[0])*t), g=Math.round(ca[1]+(cb[1]-ca[1])*t), bl=Math.round(ca[2]+(cb[2]-ca[2])*t);
+        return 'rgb('+r+','+g+','+bl+')';
+      }
+    }
+    return SKY[SKY.length-1][1];
+  }
+  function applySky(min){
+    var c = lerpSky(min);
+    document.body.style.backgroundColor = c;
+    document.documentElement.style.setProperty('--night', c);
+    var m = c.match(/\d+/g);
+    if (m) document.documentElement.style.setProperty('--skybar','rgba('+m[0]+','+m[1]+','+m[2]+',.82)');
+  }
+
+  function hm(m){
+    if (m < 60) return m + ' min';
+    var h = Math.floor(m/60), r = m%60;
+    return h + ' h' + (r ? ' ' + r + ' min' : '');
+  }
+
+  demoOn.addEventListener('change', function(){
+    demoRange.disabled = !demoOn.checked;
+    if (demoOn.checked && +demoRange.value === 0){
+      var r = nowInfo().min;
+      demoRange.value = (r >= 0 && r <= 600) ? r : 30;
+    }
+    update();
+  });
+  demoRange.addEventListener('input', update);
+  function scrollToNow(behavior){
+    var target = document.querySelector('.ev.active');
+    var barH = document.querySelector('.cpanel').offsetHeight; // la brújula tapa por arriba
+    var y;
+    if (target){
+      y = target.getBoundingClientRect().top + window.pageYOffset - barH - 16;
+    } else {
+      // no active event: scroll to the now-marker position on the track
+      var info = nowInfo();
+      var min = demoOn.checked ? +demoRange.value : info.min;
+      y = tl.getBoundingClientRect().top + window.pageYOffset + yFor(Math.max(0, Math.min(600, min))) - barH - innerHeight*0.35;
+    }
+    window.scrollTo({top: Math.max(0, y), behavior: behavior});
+  }
+  document.getElementById('gotoNow').addEventListener('click', function(){ scrollToNow('smooth'); });
+  window.addEventListener('resize', update);
+  update();
+  setInterval(update, 20000);
+  window.__i18n.push(update);
+  // Con solo abrirla, la tarjeta de lo que toca ahora ya está delante: sin scroll ni botones.
+  // Tras 'load' porque las fuentes mueven el layout, y solo si nadie ha tocado el scroll todavía.
+  window.addEventListener('load', function(){
+    requestAnimationFrame(function(){ if (window.pageYOffset < 4) scrollToNow('auto'); });
+  });
+})();
+</script>
+
+<script>
+(function(){
+  var cv = document.getElementById('sky'), cx = cv.getContext('2d');
+  var DPR = Math.min(2, window.devicePixelRatio || 1);
+  function rs(){ cv.width = innerWidth*DPR; cv.height = innerHeight*DPR; cv.style.width = innerWidth+'px'; cv.style.height = innerHeight+'px'; cx.setTransform(DPR,0,0,DPR,0,0); }
+  addEventListener('resize', rs); rs();
+
+  var stars = [];
+  for (var i=0;i<160;i++) stars.push({
+    x:Math.random(), y:Math.random(), r:Math.random()*1.2+0.4,
+    m:Math.random(), p:Math.random()*6.28, s:0.5+Math.random()*1.5
+  });
+  // Cassiopeia "W" near the radiant, and the Perseids radiant (NE ~ upper right)
+  var CAS = [[.60,.13],[.645,.185],[.69,.135],[.735,.195],[.775,.145]];
+  var RAD = {x:.82, y:.30};
+  var meteors = [];
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function dark(m){
+    if (m < 140) return 0;
+    if (m < 149) return (m-140)/9*0.85;          // eclipse dip: stars pop out
+    if (m < 158) return 0.85-(m-149)/9*0.75;     // light returns
+    if (m < 180) return 0.10;
+    if (m < 300) return 0.10+(m-180)/120*0.90;   // dusk -> full night
+    return 1;
+  }
+  function dip(m){ return (m>141 && m<157) ? 1-Math.abs(m-149)/8 : 0; }
+  function rate(m){
+    if (m < 270) return 0;
+    if (m < 300) return 0.003;
+    if (m < 420) return 0.008;
+    if (m < 541) return 0.018;   // 01:00-03:00 peak shower
+    if (m <= 600) return 0.008;
+    return 0;
+  }
+  function spawn(W,H){
+    var a = Math.PI*(0.55 + Math.random()*0.62);           // travel down-left, away from radiant
+    var d0 = 40 + Math.random()*260;
+    var x = RAD.x*W + Math.cos(a)*d0, y = RAD.y*H + Math.sin(a)*d0;
+    var sp = 9 + Math.random()*8;
+    meteors.push({x:x, y:y, vx:Math.cos(a)*sp, vy:Math.sin(a)*sp, life:1, len:60+Math.random()*70, big:Math.random()<0.12});
+  }
+  function planet(x,y,name,r,a){
+    cx.globalAlpha = a*0.35; cx.fillStyle = '#FFF6D8';
+    cx.beginPath(); cx.arc(x,y,r*3,0,6.283); cx.fill();
+    cx.globalAlpha = a; cx.beginPath(); cx.arc(x,y,r,0,6.283); cx.fill();
+    cx.globalAlpha = a*0.75; cx.fillStyle = '#EAF0FF';
+    cx.font = '10px "Instrument Sans", sans-serif';
+    cx.fillText(name, x+r+6, y+3);
+  }
+  var t = 0;
+  function frame(){
+    var m = (window.__nightMin != null ? window.__nightMin : 30);
+    var d = dark(m), W = innerWidth, H = innerHeight;
+    cx.clearRect(0,0,W,H); t += 0.02;
+
+    // starfield (only the brightest during the eclipse dip; all at full night)
+    for (var i=0;i<stars.length;i++){
+      var st = stars[i];
+      if (st.m > d) continue;
+      var tw = reduced ? 0.8 : (0.35 + 0.65*Math.abs(Math.sin(t*st.s + st.p)));
+      cx.globalAlpha = Math.min(1, d*tw);
+      cx.fillStyle = '#EAF0FF';
+      cx.beginPath(); cx.arc(st.x*W, st.y*H, st.r, 0, 6.283); cx.fill();
+    }
+
+    // eclipse magic: Venus & Jupiter appear beside the eclipsed Sun
+    var dp = dip(m);
+    if (dp > 0.05){ planet(0.30*W, 0.52*H, 'Venus', 3, dp); planet(0.53*W, 0.35*H, 'Júpiter', 2.4, dp*0.9); }
+
+    // Cassiopeia + Perseids radiant once it is properly dark
+    if (d > 0.65){
+      var ca = (d-0.65)/0.35;
+      cx.globalAlpha = ca*0.4; cx.strokeStyle = '#9FB4E8'; cx.lineWidth = 0.7;
+      cx.beginPath();
+      for (var j=0;j<CAS.length;j++){ var px=CAS[j][0]*W, py=CAS[j][1]*H; j?cx.lineTo(px,py):cx.moveTo(px,py); }
+      cx.stroke();
+      cx.fillStyle = '#CFE0FF';
+      for (j=0;j<CAS.length;j++){ cx.globalAlpha=ca*0.9; cx.beginPath(); cx.arc(CAS[j][0]*W, CAS[j][1]*H, 1.6, 0, 6.283); cx.fill(); }
+      cx.globalAlpha = ca*0.55; cx.font = '10px "Instrument Sans", sans-serif';
+      cx.fillText('Casiopea', CAS[0][0]*W-6, CAS[0][1]*H-10);
+      if (m >= 280){
+        cx.globalAlpha = ca*0.30; cx.fillStyle = '#7FD8C4';
+        cx.beginPath(); cx.arc(RAD.x*W, RAD.y*H, 14, 0, 6.283); cx.fill();
+        cx.globalAlpha = ca*0.6; cx.fillText('Radiante · Perseo (sobre el Montseny)', RAD.x*W-150, RAD.y*H+28);
+      }
+    }
+
+    // meteor shower
+    if (!reduced && Math.random() < rate(m)) spawn(W,H);
+    for (i=meteors.length-1;i>=0;i--){
+      var mt = meteors[i];
+      mt.x += mt.vx; mt.y += mt.vy; mt.life -= 0.028;
+      if (mt.life <= 0 || mt.x < -100 || mt.y > H+100){ meteors.splice(i,1); continue; }
+      var L = mt.len*(mt.big?1.6:1), nx = mt.vx/Math.hypot(mt.vx,mt.vy), ny = mt.vy/Math.hypot(mt.vx,mt.vy);
+      var tx = mt.x-nx*L, ty = mt.y-ny*L;
+      var g = cx.createLinearGradient(mt.x,mt.y,tx,ty);
+      g.addColorStop(0,'rgba(235,245,255,'+(0.95*mt.life)+')');
+      g.addColorStop(1,'rgba(127,216,196,0)');
+      cx.globalAlpha = 1; cx.strokeStyle = g; cx.lineWidth = mt.big?2.2:1.2; cx.lineCap='round';
+      cx.beginPath(); cx.moveTo(mt.x,mt.y); cx.lineTo(tx,ty); cx.stroke();
+      if (mt.big){ cx.globalAlpha = mt.life*0.9; cx.fillStyle='#FFFFFF'; cx.beginPath(); cx.arc(mt.x,mt.y,1.8,0,6.283); cx.fill(); }
+    }
+    cx.globalAlpha = 1;
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+<script>
+(function(){
+  var panel = document.getElementById('cpanel');
+  var tape = document.getElementById('ctape'), tapeg = document.getElementById('ctapeg');
+  var maskr = document.getElementById('tmaskr'), lubt = document.getElementById('clubt'), lubl = document.getElementById('clubl');
+  var cdeg = document.getElementById('cdeg'), ccard = document.getElementById('ccard'), cland = document.getElementById('cland');
+  var t1 = document.getElementById('ct1'), t2 = document.getElementById('ct2');
+  var perm = document.getElementById('cperm');
+  var heading = null, listening = false, W = 376;
+
+  var CARD = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSO','SO','OSO','O','ONO','NO','NNO'];
+  var LAND = [{az:286,n:'Montserrat'},{az:333,n:'La Mola'},{az:53,n:'Montseny'},{az:135,n:'Sabadell',avoid:1}];
+  var PPD = 4; // píxeles por grado en la cinta
+
+  // Cinta de rumbos: se dibuja una vez de -180° a 540° (así el desplazamiento nunca necesita dar la vuelta)
+  var t = '<g id="cbandg"><rect class="band"/><rect class="band"/><rect class="band"/></g>';
+  for (var a=-180;a<=540;a+=5){
+    var x = a*PPD, m = ((a%360)+360)%360, maj = m%15===0;
+    t += '<line class="'+(maj?'tkM':'tk')+'" x1="'+x+'" y1="8" x2="'+x+'" y2="'+(maj?21:15)+'"/>';
+    if (m%45===0) t += '<text class="lbl" x="'+x+'" y="34" text-anchor="middle">'+CARD[m/22.5]+'</text>';
+  }
+  LAND.forEach(function(L){
+    [-360,0,360].forEach(function(o){
+      var a2 = L.az+o; if (a2 < -180 || a2 > 540) return;
+      t += '<circle class="lndp'+(L.avoid?' avoidp':'')+'" cx="'+(a2*PPD)+'" cy="42" r="2.2"/>'
+         + '<text class="lnd'+(L.avoid?' avoid':'')+'" x="'+(a2*PPD)+'" y="57" text-anchor="middle">'+L.n+'</text>';
+    });
+  });
+  tapeg.innerHTML = t;
+  var bands = tapeg.querySelectorAll('.band');
+
+  // ===== Háptica de la brújula =====
+  // Barrido: un detente por cada marca de 5° de la cinta. Acercándose: pulsos cada vez más
+  // seguidos (tipo sonar). Fijado: ráfaga de confirmación y luego un latido lento.
+  var hDelta = 999, hTol = 12, hapT = 0, hapState = '', lastTk = null, hMove = 0, hGo = false;
+  function haptic(now){
+    // en reposo calla: el panel está siempre abierto y no puede vibrar toda la noche.
+    // hGo = tramo "de camino": no hay objetivo, así que tampoco vibra.
+    if (hGo || heading == null || now - hMove > 2500 || document.visibilityState !== 'visible') return;
+    var d = Math.abs(hDelta);
+    if (d <= hTol){
+      if (hapState !== 'lock'){ hapState = 'lock'; hapT = now; window.__buzz([70,50,70,50,220]); return; }
+      if (now - hapT > 1400){ hapT = now; window.__buzz([12]); }   // sigues apuntando bien
+      return;
+    }
+    if (d <= hTol + 24){                                            // sonar: 60 ms pegado al objetivo → ~660 ms lejos
+      hapState = 'near';
+      if (now - hapT > 60 + (d - hTol) * 25){ hapT = now; window.__buzz([18]); }
+      return;
+    }
+    hapState = 'far';
+    var tk = Math.round(heading / 5);
+    if (tk !== lastTk){ lastTk = tk; if (now - hapT > 55){ hapT = now; window.__buzz([8]); } }
+  }
+  setInterval(function(){ haptic(performance.now()); }, 40);
+
+  function nearLand(h){
+    for (var i=0;i<LAND.length;i++){
+      if (Math.abs(((LAND[i].az - h + 540) % 360) - 180) <= 12) return LAND[i];
+    }
+    return null;
+  }
+
+  // navigator.vibrate está bloqueado hasta que hay un gesto del usuario ("sticky user activation"):
+  // al entrar nadie ha tocado nada, así que no vibraría hasta el primer toque. Se avisa y se confirma con un pulso.
+  var vibEl = document.getElementById('cvib');
+  if (navigator.vibrate){
+    vibEl.hidden = false;
+    window.addEventListener('pointerdown', function(){
+      vibEl.hidden = true;
+      navigator.vibrate(20); // dentro del gesto: desbloquea y confirma que se nota
+    }, {once:true});
+  }
+
+  // El panel tapa el header: el cuerpo baja exactamente su alto (que cambia con el texto)
+  function fitBody(){ if (!panel.hidden) document.body.style.paddingTop = panel.offsetHeight + 'px'; }
+  if (window.ResizeObserver) new ResizeObserver(fitBody).observe(panel);
+
+  // La cinta mide en px reales: 1 unidad SVG = 1 px a cualquier ancho
+  function layout(){
+    W = Math.round(tape.getBoundingClientRect().width) || 376;
+    tape.setAttribute('viewBox','0 0 '+W+' 62');
+    maskr.setAttribute('width', W);
+    var c = W/2;
+    lubl.setAttribute('x1',c); lubl.setAttribute('x2',c);
+    lubt.setAttribute('d','M'+(c-7)+' 0 H'+(c+7)+' L'+c+' 9 Z');
+    fitBody();
+    render();
+  }
+
+  // Consejo flotante por fase. Mientras el Sol está fuera manda la regla de las gafas (ISO 12312-2): no se suaviza.
+  var tipEl = document.getElementById('ctip'), lastTip = '';
+  var TIPS = [
+    {max:95,   rule:1, i:'⚠️', k:'p1'},
+    {max:174,  rule:1, i:'⚠️', k:'p2'},
+    {max:300,  rule:0, i:'💡', k:'p3'},
+    {max:1e9,  rule:0, i:'✦',      k:'p4'}
+  ];
+  function setTip(min){
+    var tp = TIPS[TIPS.length-1];
+    for (var i=0;i<TIPS.length;i++){ if (min < TIPS[i].max){ tp = TIPS[i]; break; } }
+    var key = tp.k + window.__lang();
+    if (key === lastTip) return;
+    lastTip = key;
+    tipEl.className = 'ctip' + (tp.rule ? ' rule' : '');
+    tipEl.innerHTML = '<span class="ci">'+tp.i+'</span><span><b>'+T(tp.k+'h')+'.</b> '+T(tp.k+'t')+'</span>';
+  }
+
+  // Targets from the user's spots: eclipse = Sun over Montserrat (286°); Perseids = La Mola–Montseny arc, center ~13°
+  // Cuatro tramos: de camino (sin punto fijo) → eclipse → de camino → Perséidas.
+  function target(min){
+    if (min < 60)  return {go:T('go1'), tip:T('tip1')};
+    if (min < 174) return {az:286, tol:12, to:T('to2'), at:T('at2'), tip:T('tip2')};
+    if (min < 270) return {go:T('go2'), tip:T('tip3')};
+    return {az:13, tol:40, to:T('to4'), at:T('at4'), tip:T('tip4')};
+  }
+  function onOri(e){
+    var h = null;
+    if (typeof e.webkitCompassHeading === 'number') h = e.webkitCompassHeading;
+    else if (e.alpha != null) h = (360 - e.alpha) % 360;
+    if (h == null) return;
+    if (heading == null) panel.classList.add('live');
+    else if (Math.abs(((h - heading + 540) % 360) - 180) > 0.6) hMove = performance.now();
+    heading = h; render();
+  }
+  function render(){
+    var min = (window.__nightMin != null ? window.__nightMin : 30);
+    var tg = target(min);
+    setTip(min);
+    for (var i=0;i<3;i++){                         // banda del objetivo, x3 para cubrir el giro completo
+      bands[i].setAttribute('x', tg.go ? -9999 : (tg.az - 360 + 360*i - tg.tol) * PPD);
+      bands[i].setAttribute('width', tg.go ? 0 : 2 * tg.tol * PPD);
+      bands[i].setAttribute('y', 0);
+      bands[i].setAttribute('height', 25);
+    }
+    var h = heading == null ? (tg.az != null ? tg.az : 0) : heading;  // sin sensor la cinta se centra en el objetivo (o al norte)
+    tapeg.setAttribute('transform','translate(' + (W/2 - h*PPD) + ',0)');
+    if (heading == null) return;
+    // De camino: no hay punto al que apuntar, así que ni objetivo ni háptica, solo el rumbo como referencia
+    if (tg.go){
+      hGo = true;
+      panel.classList.remove('hit');
+      t1.classList.remove('ok');
+      t1.textContent = tg.go;
+      t2.textContent = tg.tip;
+      cdeg.textContent = Math.round(heading) + '°';
+      ccard.textContent = CARD[Math.round(heading/22.5)%16];
+      var Lg = nearLand(heading);
+      cland.textContent = Lg ? (Lg.avoid ? T('evita') : T('hacia')) + Lg.n : '';
+      return;
+    }
+    hGo = false;
+    cdeg.textContent = Math.round(heading) + '°';
+    ccard.textContent = CARD[Math.round(heading/22.5)%16];
+    var L = nearLand(heading);
+    cland.textContent = L ? (L.avoid ? T('evita') : T('hacia')) + L.n : '';
+    var delta = ((tg.az - heading + 540) % 360) - 180;
+    hDelta = delta; hTol = tg.tol;
+    if (Math.abs(delta) <= tg.tol){
+      panel.classList.add('hit');
+      t1.classList.add('ok');
+      t1.textContent = T('ahi');
+      t2.textContent = tg.at + ' ' + tg.tip;
+    } else {
+      panel.classList.remove('hit');
+      t1.classList.remove('ok');
+      var g = Math.round(Math.abs(delta));
+      t1.textContent = delta > 0 ? T('girad') + g + T('dcha') : T('izq') + g + T('izqf');
+      t2.textContent = tg.to;
+    }
+  }
+  function attach(){
+    if (listening) return;
+    var ev = ('ondeviceorientationabsolute' in window) ? 'deviceorientationabsolute' : 'deviceorientation';
+    window.addEventListener(ev, onOri);
+    listening = true;
+    perm.hidden = true;
+    t1.textContent = T('buscando');
+    t2.textContent = T('puntero');
+    ccard.textContent = T('cardBusc');
+    setTimeout(function(){
+      if (heading == null){
+        ccard.textContent = T('cardSin');
+        t1.textContent = T('sinSenal');
+        t2.textContent = T('sinSenal2');
+      }
+    }, 2500);
+  }
+  perm.addEventListener('click', function(){
+    if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function'){
+      DeviceOrientationEvent.requestPermission().then(function(st){
+        if (st === 'granted') attach();
+        else { t1.textContent = T('permNo'); t2.textContent = T('permNo2'); }
+      }).catch(function(){ t1.textContent = T('permErr'); t2.textContent = T('permErr2'); });
+    } else attach();
+  });
+  window.addEventListener('resize', layout);
+  layout();
+  if (!(typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function')){
+    attach(); // Android y escritorio: no hace falta gesto, la brújula arranca sola
+  }
+  setInterval(render, 1000); // el objetivo cambia con la fase de la noche
+  window.__i18n.push(function(){ lastTip = ''; render(); });
+})();
+</script>
+</body>
+</html>
