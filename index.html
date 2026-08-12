@@ -154,6 +154,17 @@ h1 em{font-style:italic;color:var(--dusk)}
 .grp{margin-top:11px;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--meteor)}
 .nb{margin-top:9px;font-size:12px;color:#8E93A8}
 .nb s{color:#8E93A8}
+/* el desig: la mateixa veu que el peu de pagina, perque es el moment que il·lusiona */
+.wishcard{display:flex;align-items:center;gap:10px;margin-top:10px;padding:11px 13px;
+  border:1px solid rgba(127,216,196,.45);border-radius:10px;background:rgba(127,216,196,.08);
+  font-family:"Fraunces",serif;font-style:italic;font-size:15.5px;line-height:1.25;color:#BDF0E4}
+.wishcard svg{width:21px;height:21px;flex:none;fill:none;stroke:var(--meteor);stroke-width:1.6;
+  stroke-linecap:round;stroke-linejoin:round}
+/* Un sol element a la targeta: el xip d'icona no distingeix res, aixi que el text ocupa tot.
+   :only-of-type mira els germans del mateix tag, o sigui l'unic div.row entre figures i paragrafs. */
+.rows > .row:only-of-type .ric{display:none}
+.rows > .row:only-of-type{padding:8px 12px}
+.rows > .row:only-of-type .rv{font-size:13.5px}
 .scene .mt{fill:#232A4E;stroke:#3A4270;stroke-width:1}
 .scene .stg{fill:#1B2246;stroke:#4A5488;stroke-width:1}
 .scene .gnd,.scene .std{stroke:#3A4270;stroke-width:1;fill:none}
@@ -346,17 +357,6 @@ footer .made a:hover{color:var(--aura);text-decoration-color:var(--aura)}
         <div class="ev-h"><span class="ev-time">19:35</span><span class="ev-title" data-es="Empieza el eclipse">Comença l'eclipsi</span></div>
         
         <div class="rows">
-          <div class="row r-m"><span class="ric">👁</span><span class="rb"><span class="rlbl">Mirar</span><span class="rv" data-es="Al Sol, <b>solo con gafas</b>: la Luna le va dando mordiscos">Al Sol, <b>només amb ulleres</b>: la Lluna li va fent queixalades</span></span></div>
-          <div class="row r-h"><span class="ric">✦</span><span class="rb"><span class="rlbl" data-es="Qué hacer">Què fer</span><span class="rv" data-es="Vistazos cortos cada 5–10 min; entre medias, nota la luz cada vez más rara">Cops d'ull curts cada 5–10 min; entremig, fixa't com la llum es torna estranya</span></span></div>
-          <div class="row r-f"><span class="ric">📷</span><span class="rb"><span class="rlbl">Foto</span><span class="rv" data-es="Sombras de las hojas: mini medias lunas en el suelo">Ombres de les fulles: mini mitges llunes a terra</span></span></div>
-        </div>
-      
-      </div>
-
-      <div class="ev" data-min="149" data-color="#E4572E"><span class="dot d3"></span>
-        <div class="ev-h"><span class="ev-time">20:29</span><span class="ev-title" data-es="Máximo · 99%">Màxim · 99%</span><span class="tag tmax" data-es="El momento">El moment</span></div>
-        
-        <div class="rows">
           <figure class="scene">
             <svg viewBox="0 0 240 106" role="img" aria-label="Desde la grada del anfiteatro, mirando por encima del escenario: el Sol eclipsado está justo sobre la silueta de Montserrat, un poco a la derecha.">
               <!-- Montserrat -->
@@ -381,6 +381,16 @@ footer .made a:hover{color:var(--aura);text-decoration-color:var(--aura)}
             </svg>
             <figcaption data-es="<b>Vistazos cortos</b> al Sol. El resto del tiempo, mira el entorno."><b>Cops d'ull curts</b> al Sol. La resta del temps, mira l'entorn.</figcaption>
           </figure>
+          <div class="row r-h"><span class="ric">✦</span><span class="rb"><span class="rlbl" data-es="Qué hacer">Què fer</span><span class="rv" data-es="Vistazos cortos cada 5–10 min; entre medias, nota la luz cada vez más rara">Cops d'ull curts cada 5–10 min; entremig, fixa't com la llum es torna estranya</span></span></div>
+          <div class="row r-f"><span class="ric">📷</span><span class="rb"><span class="rlbl">Foto</span><span class="rv" data-es="Sombras de las hojas: mini medias lunas en el suelo">Ombres de les fulles: mini mitges llunes a terra</span></span></div>
+        </div>
+      
+      </div>
+
+      <div class="ev" data-min="149" data-color="#E4572E"><span class="dot d3"></span>
+        <div class="ev-h"><span class="ev-time">20:29</span><span class="ev-title" data-es="Máximo · 99%">Màxim · 99%</span><span class="tag tmax" data-es="El momento">El moment</span></div>
+        
+        <div class="rows">
           <p class="grp" data-es="El entorno">L'entorn</p>
           <div class="tiles">
             <span class="tile"><svg><use href="#i-luz"/></svg><span data-es="Luz gris, no noche">Llum grisa, no nit</span></span>
@@ -455,6 +465,7 @@ footer .made a:hover{color:var(--aura);text-decoration-color:var(--aura)}
         
         <div class="rows">
           <div class="row r-m"><span class="ric">👁</span><span class="rb"><span class="rlbl">Mirar</span><span class="rv" data-es="Encima de <b>La Mola</b> (la montaña de la ermita plana, al norte), a media altura">Damunt de <b>La Mola</b> (la muntanya de l'ermita plana, al nord), a mitja alçada</span></span></div>
+          <p class="wishcard"><svg><use href="#i-venus"/></svg><span data-es="Pide un deseo con la primera.">Demana un desig amb la primera.</span></p>
         </div>
       
       </div>
@@ -464,7 +475,7 @@ footer .made a:hover{color:var(--aura);text-decoration-color:var(--aura)}
         
         <div class="rows">
           <div class="row r-m"><span class="ric">👁</span><span class="rb"><span class="rlbl">Mirar</span><span class="rv" data-es="El arco de cielo <b>entre La Mola y el Montseny</b>, bien arriba">L'arc de cel <b>entre La Mola i el Montseny</b>, ben amunt</span></span></div>
-          <div class="row r-h"><span class="ric">✦</span><span class="rb"><span class="rlbl" data-es="Qué hacer">Què fer</span><span class="rv" data-es="Una cada 1–3 min, a rachas: manta, paciencia y a contar. Pide un deseo con la primera ✨">Una cada 1–3 min, a estones: manta, paciència i a comptar. Demana un desig amb la primera ✨</span></span></div>
+          <div class="row r-h"><span class="ric">✦</span><span class="rb"><span class="rlbl" data-es="Qué hacer">Què fer</span><span class="rv" data-es="Una cada 1–3 min, a rachas: manta, paciencia y a contar">Una cada 1–3 min, a estones: manta, paciència i a comptar</span></span></div>
           <div class="row r-f"><span class="ric">📷</span><span class="rb"><span class="rlbl">Foto</span><span class="rv" data-es="Modo noche 3–10 s, móvil apoyado apuntando sobre La Mola">Mode nit 3–10 s, mòbil recolzat apuntant sobre La Mola</span></span></div>
         </div>
       
