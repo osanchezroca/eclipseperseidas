@@ -23,9 +23,9 @@ Toda la información buscada estaba en formato astrónomo — azimut 286°, altu
 
 ## Seguridad
 
-Gafas certificadas **ISO 12312-2** siempre que se mire al Sol. En Sabadell el eclipse es casi total (~99%) pero **no hay totalidad**: no existe ningún momento seguro sin gafas, y las de sol no valen. El aviso está fijo en pantalla toda la tarde y no se puede cerrar.
+Gafas certificadas **ISO 12312-2** siempre que se mire al Sol. En Sabadell el eclipse es casi total (~99,5%) pero **no hay totalidad**: no existe ningún momento seguro sin gafas, y las de sol no valen. El aviso está fijo en pantalla toda la tarde y no se puede cerrar.
 
-## Lo que a 99% no se ve
+## Lo que a 99,5% no se ve
 
 Es la mitad del valor de la guía, porque mucha gente lo busca y se pierde el momento: **no hay corona, ni anillo de diamante, ni perlas de Baily**. Eso solo ocurre dentro de la franja de totalidad, que pasa por el sur de Lleida y Tarragona. El 1% de Sol que queda sigue siendo unas mil veces más brillante que la corona.
 
@@ -49,7 +49,7 @@ Desplegada con **GitHub Pages** desde `main`. Se prueba en móvil por https y co
 | | |
 |---|---|
 | Inicio del eclipse | 19:35 CEST |
-| Máximo (~99%) | 20:29 · Sol a ~4° de altura, sobre la silueta de Montserrat |
+| Máximo (~99,5%) | 20:29 · Sol a ~4° de altura, sobre la silueta de Montserrat |
 | Fin del eclipse | 20:54 |
 | Perseidas | pico la noche del 12 al 13, con luna nueva · mejor ventana 01:00–03:00 |
 

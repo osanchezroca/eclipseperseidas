@@ -4,7 +4,7 @@ Guía web "en directo" para vivir el eclipse solar del 12 de agosto de 2026 y la
 
 ## Contexto del evento (datos reales, no inventar)
 
-- **Fecha:** miércoles 12 de agosto de 2026. Eclipse solar casi total en Sabadell (~99% de ocultación; la franja de totalidad pasa por el sur de Lleida/Tarragona, no por el Vallès).
+- **Fecha:** miércoles 12 de agosto de 2026. Eclipse solar casi total en Sabadell (~99,5% de ocultación; la franja de totalidad pasa por el sur de Lleida/Tarragona, no por el Vallès).
 - **Horarios del eclipse (CEST, zona Barcelona/Sabadell):** inicio 19:35 · máximo 20:29 · fin 20:54. En el máximo el Sol está a solo ~4° de altura, azimut ~286° (O-NO).
 - **Perseidas:** pico la noche del 12 al 13. Luna nueva (la misma del eclipse) → cielo óptimo. Mejor ventana: 01:00–03:00.
 - **Seguridad:** gafas certificadas ISO 12312-2 obligatorias siempre; en Sabadell no hay ningún momento seguro sin gafas (no hay totalidad). No suavizar ni eliminar este aviso.
@@ -71,11 +71,11 @@ Todo vive en un solo archivo con tres `<script>` IIFE independientes que se comu
 - Los textos dinámicos (barra de estado, brújula, consejos) viven en el diccionario `D.ca` / `D.es`. Las frases con preposición van **completas** (`to2`, `at2`…), no concatenadas: en catalán "Cap a" + "el Sol" daría "cap a el Sol".
 - Selector `CA · ES` en la barra de abajo, junto a "⌖ Ara". Se recuerda en `localStorage.lang`.
 
-## Datos reales del 99% (comprobados, no inventar)
+## Datos reales del 99,5% (comprobados, no inventar)
 
-- A 99% **no** se ve corona, ni anillo de diamante, ni perlas de Baily: eso es solo en la franja de totalidad. El 1% de Sol que queda es ~1000 veces más brillante que la corona. La app lo dice explícitamente ("No ho busquis") para que nadie pierda el momento buscándolo.
+- A 99,5% **no** se ve corona, ni anillo de diamante, ni perlas de Baily: eso es solo en la franja de totalidad. El 1% de Sol que queda es ~1000 veces más brillante que la corona. La app lo dice explícitamente ("No ho busquis") para que nadie pierda el momento buscándolo.
 - Sí se ve: luz gris apagada (no llega a noche), sombras más afiladas, medias lunas proyectadas por las hojas, y **Venus** (mag −4,4) como el objeto más fácil a simple vista. El Sol está a ~2–4° del horizonte, así que hace falta horizonte oeste limpio.
-- No prometer bajada de temperatura ni silencio de los pájaros como hechos seguros: a 99% el cambio es leve.
+- No prometer bajada de temperatura ni silencio de los pájaros como hechos seguros: a 99,5% el cambio es leve.
 
 ## Diseño
 
