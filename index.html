@@ -24,7 +24,7 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--night);color:var(--ink);font-family:"Instrument Sans",system-ui,sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background-color 1.2s ease;
   padding-bottom:calc(76px + env(safe-area-inset-bottom))}
-.wrap{max-width:640px;margin:0 auto;padding:0 18px}
+.wrap{max-width:640px;margin:0 auto;padding:0 14px}
 b{color:var(--ink);font-weight:600}
 
 /* ===== STICKY LIVE BAR ===== */
@@ -84,21 +84,21 @@ b{color:var(--ink);font-weight:600}
 .cpanel.hit .lubl{stroke:var(--aura)}
 .cpanel.hit .lubt{fill:var(--aura);filter:drop-shadow(0 1px 7px var(--aura))}
 /* primero la acción (grande), después el dato de referencia (pequeño) */
-.cinfo{padding:7px 18px 0}
+.cinfo{padding:7px 14px 0}
 .ct1{font-family:"Fraunces",serif;font-size:clamp(20px,5.4vw,25px);font-weight:600;line-height:1.12;letter-spacing:-.01em}
 .ct1.ok{color:var(--aura)}
 .ct2{font-size:13px;color:#B9BFD6;margin-top:3px}
-.cread{display:flex;align-items:baseline;gap:9px;padding:7px 18px 11px;
+.cread{display:flex;align-items:baseline;gap:9px;padding:7px 14px 11px;
   font:600 11.5px "Instrument Sans",sans-serif;letter-spacing:.13em;color:var(--dim)}
 .cdeg{font-family:"Fraunces",serif;font-size:15px;letter-spacing:0;color:var(--ink);font-variant-numeric:tabular-nums}
 .cland{letter-spacing:.02em;color:var(--meteor);margin-left:auto;text-align:right;min-width:0}
 /* Chrome no deja vibrar hasta el primer toque en la página: se avisa y se quita solo */
-.cvib{border-top:1px solid var(--line);padding:8px 18px;font-size:11.5px;letter-spacing:.02em;color:var(--dim)}
+.cvib{border-top:1px solid var(--line);padding:8px 14px;font-size:11.5px;letter-spacing:.02em;color:var(--dim)}
 .cvib::before{content:"▚ ";color:var(--ink)}
 .cvib[hidden]{display:none}
 /* consejo flotante: cambia con la fase de la noche, y durante el eclipse es la regla de seguridad */
 .ctip{display:flex;gap:9px;align-items:flex-start;border-top:1px solid var(--line);
-  padding:9px 18px 11px;font-size:12.5px;color:#B9BFD6}
+  padding:9px 14px 11px;font-size:12.5px;color:#B9BFD6}
 .ctip .ci{flex:none;font-size:13px}
 .ctip b{color:var(--ink)}
 .ctip.rule{background:rgba(228,87,46,.16);border-top-color:rgba(228,87,46,.5);color:#FFD9CB}
@@ -116,7 +116,7 @@ h1 em{font-style:italic;color:var(--dusk)}
 
 /* ===== TIMELINE ===== */
 .tl-section{padding:26px 0 40px}
-.tl{position:relative;padding-left:40px}
+.tl{position:relative;padding-left:30px}
 .track{position:absolute;left:13px;top:0;bottom:0;width:3px;border-radius:3px;
   background:linear-gradient(180deg,#7FB4E8,#F2C063 14%,#F2A65A 22%,#E4572E 30%,#8A4A9E 40%,#4A5488 52%,#1A2150 70%,#0A0E28)}
 .track-fill{position:absolute;left:13px;top:0;width:3px;border-radius:3px;background:rgba(233,234,242,.28);height:0;transition:height 1s ease}
@@ -132,15 +132,15 @@ h1 em{font-style:italic;color:var(--dusk)}
 
 /* events */
 .ev{position:relative;margin-bottom:14px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);
-  padding:12px 15px;transition:opacity .6s,border-color .6s,box-shadow .6s,transform .6s,filter .4s ease}
-.dot{position:absolute;left:-33.5px;top:17px;width:16px;height:16px;border-radius:50%;border:3px solid var(--night);z-index:2;transition:box-shadow .6s}
+  padding:12px 12px;transition:opacity .6s,border-color .6s,box-shadow .6s,transform .6s,filter .4s ease}
+.dot{position:absolute;left:-23.5px;top:17px;width:16px;height:16px;border-radius:50%;border:3px solid var(--night);z-index:2;transition:box-shadow .6s}
 .d0{background:#7FB4E8}.d1{background:#F2C063}.d2{background:#F2A65A}.d3{background:#E4572E}
 .d4{background:#8A4A9E}.d5{background:#4A5488}.d6{background:#1A2150}.d7{background:#0E1440}
 .ev-h{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
 .ev-time{font-family:"Fraunces",serif;font-size:17px;font-weight:600}
 .ev-title{font-weight:600;font-size:14px}
 .rows{margin-top:9px;display:grid;gap:6px}
-.row{display:flex;gap:10px;align-items:flex-start;background:rgba(255,255,255,.035);border:1px solid rgba(42,49,88,.55);border-radius:10px;padding:7px 10px}
+.row{display:flex;gap:9px;align-items:flex-start;background:rgba(255,255,255,.035);border:1px solid rgba(42,49,88,.55);border-radius:10px;padding:7px 9px}
 .ric{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:19px;line-height:1;flex:none;margin-top:1px}
 .rb{display:flex;flex-direction:column;gap:1px;min-width:0;flex:1}
 .rlbl{font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
@@ -185,7 +185,8 @@ h1 em{font-style:italic;color:var(--dusk)}
 .scene .sl{fill:var(--dusk)}
 .scene .yl{fill:var(--ink)}
 /* esquema visual: pictograma + dos palabras, para hacer sin leer parrafos */
-.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(82px,1fr));gap:5px;margin-top:8px}
+/* 2x2 fijo: con cuatro elementos, auto-fit dejaba un 3+1 descompensado */
+.tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-top:8px}
 .tile{display:flex;align-items:center;gap:8px;
   background:rgba(255,255,255,.045);border:1px solid rgba(42,49,88,.7);border-radius:9px;padding:7px 9px}
 .tile svg{width:25px;height:25px;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
