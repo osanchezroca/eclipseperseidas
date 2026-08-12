@@ -147,8 +147,13 @@ h1 em{font-style:italic;color:var(--dusk)}
 .rv{font-size:13px;color:var(--dim);line-height:1.45}
 .rv s{color:#8E93A8;text-decoration-thickness:1px}
 /* esquema del sitio: dónde queda el Sol desde la grada */
-.scene{margin-top:8px;background:rgba(255,255,255,.03);border:1px solid rgba(42,49,88,.7);border-radius:10px;padding:6px 8px 2px}
+.scene{margin-top:8px;background:rgba(255,255,255,.03);border:1px solid rgba(42,49,88,.7);border-radius:10px;padding:6px 10px 9px}
 .scene svg{display:block;width:100%;height:auto}
+.scene figcaption{margin-top:4px;font-size:12px;line-height:1.35;color:#B9BFD6}
+/* etiqueta de grupo a ancho completo: sin chip, para que la rejilla respire */
+.grp{margin-top:11px;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--meteor)}
+.nb{margin-top:9px;font-size:12px;color:#8E93A8}
+.nb s{color:#8E93A8}
 .scene .mt{fill:#232A4E;stroke:#3A4270;stroke-width:1}
 .scene .stg{fill:#1B2246;stroke:#4A5488;stroke-width:1}
 .scene .gnd,.scene .std{stroke:#3A4270;stroke-width:1;fill:none}
@@ -159,6 +164,13 @@ h1 em{font-style:italic;color:var(--dusk)}
 .scene .losh{fill:var(--dusk)}
 .scene .you{fill:var(--ink)}
 .scene .lb{font:600 9px "Instrument Sans",sans-serif;fill:var(--dim);letter-spacing:.03em}
+/* escena de les Perseides */
+.scene .arc{stroke:var(--meteor);stroke-width:1.3;stroke-dasharray:5 4;fill:none;opacity:.9}
+.scene .ml{fill:var(--meteor)}
+.scene .rad{fill:var(--meteor)}
+.scene .mtr{stroke:var(--meteor);stroke-width:1.2;fill:none;opacity:.65;stroke-linecap:round}
+.scene .mlos{stroke:var(--meteor)}
+.scene .onmt{fill:#C9CEE6;paint-order:stroke;stroke:#141A38;stroke-width:3;stroke-linejoin:round}
 .scene .sl{fill:var(--dusk)}
 .scene .yl{fill:var(--ink)}
 /* esquema visual: pictograma + dos palabras, para hacer sin leer parrafos */
@@ -345,8 +357,6 @@ footer .made a:hover{color:var(--aura);text-decoration-color:var(--aura)}
         <div class="ev-h"><span class="ev-time">20:29</span><span class="ev-title" data-es="Máximo · 99%">Màxim · 99%</span><span class="tag tmax" data-es="El momento">El moment</span></div>
         
         <div class="rows">
-          <div class="row r-m"><span class="ric">👁</span><span class="rb"><span class="rlbl" data-es="Con gafas · al Sol">Amb ulleres · al Sol</span><span class="rv" data-es="Desde tu sitio, por encima del escenario: <b>gafas puestas</b>, vistazos cortos">Des del teu lloc, per damunt de l'escenari: <b>ulleres posades</b>, cops d'ull curts</span></span></div>
-
           <figure class="scene">
             <svg viewBox="0 0 240 106" role="img" aria-label="Desde la grada del anfiteatro, mirando por encima del escenario: el Sol eclipsado está justo sobre la silueta de Montserrat, un poco a la derecha.">
               <!-- Montserrat -->
@@ -369,17 +379,16 @@ footer .made a:hover{color:var(--aura);text-decoration-color:var(--aura)}
               <text class="lb" x="232" y="79" text-anchor="end">Montserrat</text>
               <text class="lb sl" x="176" y="16" text-anchor="middle">el Sol, aquí</text>
             </svg>
+            <figcaption data-es="<b>Vistazos cortos</b> al Sol. El resto del tiempo, mira el entorno."><b>Cops d'ull curts</b> al Sol. La resta del temps, mira l'entorn.</figcaption>
           </figure>
-          <div class="row r-h"><span class="ric">✦</span><span class="rb"><span class="rlbl" data-es="Sin gafas · el entorno">Sense ulleres · l'entorn</span>
-            <div class="tiles">
-              <span class="tile"><svg><use href="#i-luz"/></svg><span data-es="Luz gris, no noche">Llum grisa, no nit</span></span>
-              <span class="tile"><svg><use href="#i-sombra"/></svg><span data-es="Sombras afiladas">Ombres afilades</span></span>
-              <span class="tile"><svg><use href="#i-lunas"/></svg><span data-es="Medias lunas en el suelo">Mitges llunes a terra</span></span>
-              <span class="tile"><svg><use href="#i-venus"/></svg><span data-es="Venus, arriba a la izq.">Venus, amunt a l'esq.</span></span>
-              <span class="tile"><svg><use href="#i-ave"/></svg><span data-es="Los pájaros cambian">Els ocells canvien</span></span>
-              <span class="tile"><svg><use href="#i-foto"/></svg><span data-es="Foto al ambiente">Foto a l'ambient</span></span>
-            </div></span></div>
-          <div class="row r-k"><span class="ric">💡</span><span class="rb"><span class="rlbl" data-es="No lo busques">No ho busquis</span><span class="rv" data-es="<s>corona</s> <s>anillo de diamante</s> — solo en la franja total, al sur"><s>corona</s> <s>anell de diamant</s> — només a la franja total, al sud</span></span></div>
+          <p class="grp" data-es="El entorno">L'entorn</p>
+          <div class="tiles">
+            <span class="tile"><svg><use href="#i-luz"/></svg><span data-es="Luz gris, no noche">Llum grisa, no nit</span></span>
+            <span class="tile"><svg><use href="#i-sombra"/></svg><span data-es="Sombras afiladas">Ombres afilades</span></span>
+            <span class="tile"><svg><use href="#i-lunas"/></svg><span data-es="Medias lunas en el suelo">Mitges llunes a terra</span></span>
+            <span class="tile"><svg><use href="#i-venus"/></svg><span data-es="Venus, arriba a la izquierda">Venus, amunt a l'esquerra</span></span>
+          </div>
+          <p class="nb" data-es="<s>corona</s> <s>anillo de diamante</s> — eso solo en la franja total, al sur"><s>corona</s> <s>anell de diamant</s> — això només a la franja total, al sud</p>
         </div>
       
       </div>
@@ -410,8 +419,33 @@ footer .made a:hover{color:var(--aura);text-decoration-color:var(--aura)}
         
         <div class="rows">
           <div class="row r-w"><span class="ric">📍</span><span class="rb"><span class="rlbl" data-es="Dónde">On</span><span class="rv" data-es="El campo de siempre">El camp de sempre</span></span></div>
-          <div class="row r-h"><span class="ric">✦</span><span class="rb"><span class="rlbl" data-es="Qué hacer">Què fer</span><span class="rv" data-es="Esterillas con los <b>pies hacia el Montseny</b> (macizo grande al NE), espalda a Sabadell">Estores amb els <b>peus cap al Montseny</b> (el massís gran al NE), esquena a Sabadell</span></span></div>
-          <div class="row r-k"><span class="ric">💡</span><span class="rb"><span class="rlbl" data-es="Clave">Clau</span><span class="rv" data-es="Móviles fuera: los ojos tardan 20–30 min en adaptarse">Mòbils fora: els ulls tarden 20–30 min a adaptar-se</span></span></div>
+
+          <figure class="scene">
+            <svg viewBox="0 0 240 106" role="img" aria-label="Estirado en el campo con los pies hacia el Montseny y la espalda a las luces de Sabadell: el arco de cielo a mirar va desde encima de La Mola hasta el Montseny, bien alto.">
+              <!-- arc de cel a mirar -->
+              <path class="arc" d="M46 50 Q120 8 196 54"/>
+              <text class="lb ml" x="120" y="15" text-anchor="middle" data-es="mira aquí, bien alto">mira aquí, ben amunt</text>
+              <!-- radiant sobre el Montseny i unes fugaces -->
+              <path class="rad" d="M204 29 l1.7 5.3 5.3 1.7 -5.3 1.7 -1.7 5.3 -1.7 -5.3 -5.3 -1.7 5.3 -1.7z"/>
+              <path class="mtr" d="M196 40 l-13 11M187 31 l-10 8M205 47 l-9 8"/>
+              <!-- La Mola: la de l'ermita plana -->
+              <path class="mt" d="M14 84 L34 61 H58 L74 84 Z"/>
+              <rect class="mt" x="42" y="56" width="7" height="5"/>
+              <!-- Montseny -->
+              <path class="mt" d="M150 84 Q170 54 190 62 Q206 46 222 64 L236 84 Z"/>
+              <line class="gnd" x1="4" y1="84" x2="236" y2="84"/>
+              <!-- tu, estirat, peus cap al Montseny -->
+              <path class="los mlos" d="M92 91 L116 26"/>
+              <line class="std" x1="88" y1="97" x2="152" y2="97"/>
+              <circle class="you" cx="88" cy="93" r="3.6"/>
+              <path class="rad" d="M155 94 l7 3 -7 3z"/>
+              <text class="lb onmt" x="44" y="79" text-anchor="middle">La Mola</text>
+              <text class="lb onmt" x="196" y="79" text-anchor="middle">Montseny</text>
+              <text class="lb yl" x="82" y="96" text-anchor="end" data-es="tú">tu</text>
+              <text class="lb ml" x="165" y="100" data-es="pies">peus</text>
+            </svg>
+            <figcaption data-es="Esterillas con los <b>pies hacia el Montseny</b> y la espalda a las luces de Sabadell.">Estores amb els <b>peus cap al Montseny</b> i l'esquena a les llums de Sabadell.</figcaption>
+          </figure>
         </div>
       
       </div>
@@ -421,7 +455,6 @@ footer .made a:hover{color:var(--aura);text-decoration-color:var(--aura)}
         
         <div class="rows">
           <div class="row r-m"><span class="ric">👁</span><span class="rb"><span class="rlbl">Mirar</span><span class="rv" data-es="Encima de <b>La Mola</b> (la montaña de la ermita plana, al norte), a media altura">Damunt de <b>La Mola</b> (la muntanya de l'ermita plana, al nord), a mitja alçada</span></span></div>
-          <div class="row r-h"><span class="ric">✦</span><span class="rb"><span class="rlbl" data-es="Qué hacer">Què fer</span><span class="rv" data-es="Mirada relajada, sin fijar la vista: se cazan de reojo. «Nacen» sobre el <b>Montseny</b>">Mirada relaxada, sense fixar la vista: es cacen de cua d'ull. «Neixen» sobre el <b>Montseny</b></span></span></div>
         </div>
       
       </div>
@@ -470,7 +503,7 @@ footer .made a:hover{color:var(--aura);text-decoration-color:var(--aura)}
       to2:'Cap al Sol sobre Montserrat', at2:'Estàs mirant cap al Sol sobre Montserrat.',
       to4:'Cap al cel entre La Mola i el Montseny', at4:'Estàs mirant cap al cel entre La Mola i el Montseny.',
       tip1:"Graderia mirant a l'escenari. Quan arribis, la brúixola et marca on surt l'eclipsi.",
-      tip2:'Ulleres posades per mirar.',
+      tip2:'',
       tip3:"Sopeu de camí. Quan arribis, la brúixola et marca l'arc de les fugaces.",
       tip4:'Mira a mitja alçada, mirada relaxada.',
       ahi:'✓ Aquí és!',
@@ -482,7 +515,7 @@ footer .made a:hover{color:var(--aura);text-decoration-color:var(--aura)}
       permNo:'Permís denegat', permNo2:"Activa'l als ajustos del Safari per fer servir la brúixola.",
       permErr:"No s'ha pogut demanar permís", permErr2:'Obre la pàgina des de https al mòbil.',
       p1h:'Ulleres ISO 12312‑2 abans de mirar', p1t:'Ni un segon mirant el Sol sense elles. Les ulleres de sol no valen.',
-      p2h:'Única regla', p2t:"No miris mai el Sol sense ulleres d'eclipsi certificades (ISO 12312‑2). Ni un segon, ni amb ulleres de sol. Fa mal a la vista sense dolor.",
+      p2h:'Única regla', p2t:"Mai el Sol sense ulleres d'eclipsi ISO 12312‑2. Ni un segon. Les de sol no valen: fan mal sense dolor.",
       p3h:'Mòbil guardat 30 min', p3t:'Els ulls tarden 20–30 min a adaptar-se a la foscor. És el secret nº 1.',
       p4h:'Mirada relaxada, sense fixar la vista', p4t:"Peus cap al Montseny i es cacen de cua d'ull. Vénen a estones, més després de la 1:00."},
     es:{title:'Eclipse + Perseidas · Sabadell · en directo', gotoT:'Ir al momento actual',
@@ -493,7 +526,7 @@ footer .made a:hover{color:var(--aura);text-decoration-color:var(--aura)}
       to2:'Hacia el Sol sobre Montserrat', at2:'Estás mirando hacia el Sol sobre Montserrat.',
       to4:'Hacia el cielo entre La Mola y el Montseny', at4:'Estás mirando hacia el cielo entre La Mola y el Montseny.',
       tip1:'Grada mirando al escenario. Al llegar, la brújula te marca dónde sale el eclipse.',
-      tip2:'Gafas puestas para mirar.',
+      tip2:'',
       tip3:'Cenad de camino. Al llegar, la brújula te marca el arco de las fugaces.',
       tip4:'Mira a media altura, mirada relajada.',
       ahi:'✓ ¡Ahí es!',
@@ -505,7 +538,7 @@ footer .made a:hover{color:var(--aura);text-decoration-color:var(--aura)}
       permNo:'Permiso denegado', permNo2:'Actívalo en ajustes de Safari para usar la brújula.',
       permErr:'No se pudo pedir permiso', permErr2:'Abre la página desde https en el móvil.',
       p1h:'Gafas ISO 12312‑2 antes de mirar', p1t:'Ni un segundo mirando al Sol sin ellas. Las gafas de sol no valen.',
-      p2h:'Única regla', p2t:'Nunca mires al Sol sin gafas de eclipse certificadas (ISO 12312‑2). Ni un segundo, ni con gafas de sol. Daña la vista sin dolor.',
+      p2h:'Única regla', p2t:'Nunca el Sol sin gafas de eclipse ISO 12312‑2. Ni un segundo. Las de sol no valen: dañan sin dolor.',
       p3h:'Móvil guardado 30 min', p3t:'Los ojos tardan 20–30 min en adaptarse a la oscuridad. Es el secreto nº 1.',
       p4h:'Mirada relajada, sin fijar la vista', p4t:'Pies hacia el Montseny y se cazan de reojo. Vienen a rachas, más tras la 1:00.'}
   };
@@ -1019,7 +1052,7 @@ footer .made a:hover{color:var(--aura);text-decoration-color:var(--aura)}
       panel.classList.add('hit');
       t1.classList.add('ok');
       t1.textContent = T('ahi');
-      t2.textContent = tg.at + ' ' + tg.tip;
+      t2.textContent = tg.tip ? tg.at + ' ' + tg.tip : tg.at;
     } else {
       panel.classList.remove('hit');
       t1.classList.remove('ok');
