@@ -24,6 +24,8 @@
 <meta property="og:locale" content="ca_ES">
 <meta property="og:locale:alternate" content="es_ES">
 <meta property="article:author" content="https://www.linkedin.com/in/osanchezroca/">
+<meta property="article:published_time" content="2026-08-12T12:00:00+02:00">
+<meta property="article:modified_time" content="2026-08-12T12:00:00+02:00">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Eclipsi al 99% i Perseides: avui des de Sabadell">
 <meta name="twitter:description" content="A les 20:29 el Sol s'apaga al 99% sobre Montserrat. I de nit, Perseides amb lluna nova. Què toca ara i cap a on mirar.">
@@ -32,6 +34,7 @@
 {"@context":"https://schema.org","@type":"WebSite","url":"https://osanchezroca.github.io/eclipseperseidas/",
  "name":"Eclipsi + Perseides · Sabadell","inLanguage":["ca","es"],
  "description":"Guia en directe de l'eclipsi del 12 d'agost de 2026 i les Perseides d'aquella nit, des de Sabadell.",
+ "datePublished":"2026-08-12","dateModified":"2026-08-12",
  "author":{"@type":"Person","name":"Oscar Sánchez","url":"https://www.linkedin.com/in/osanchezroca/","sameAs":["https://www.linkedin.com/in/osanchezroca/"]},
  "about":{"@type":"Event","name":"Eclipsi solar parcial (99%) i Perseides","startDate":"2026-08-12T19:35:00+02:00","endDate":"2026-08-13T03:00:00+02:00","eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode","location":{"@type":"Place","name":"Sabadell","address":{"@type":"PostalAddress","addressLocality":"Sabadell","addressRegion":"Catalunya","addressCountry":"ES"}}}}
 </script>
@@ -254,11 +257,32 @@ body.night .ev:hover,body.night .ev:active,.ev:hover,.ev:active{filter:none;opac
 
 #sky{position:fixed;inset:0;z-index:0;pointer-events:none}
 header,section,footer{position:relative;z-index:1}
-footer{padding:20px 0 34px;color:var(--dim);font-size:12.5px;text-align:center;border-top:1px solid var(--line)}
-footer .wish{font-family:"Fraunces",serif;font-style:italic;font-size:16px;color:var(--ink)}
-footer .made{margin-top:12px;letter-spacing:.02em}
-footer .made a{color:var(--ink);text-decoration:underline;text-decoration-color:rgba(233,234,242,.4);text-underline-offset:3px;transition:color .3s}
-footer .made a:hover{color:var(--aura);text-decoration-color:var(--aura)}
+/* ===== DESPUES DE LA NOCHE ===== */
+.closed{padding:10px 0 2px}
+.closed[hidden]{display:none}
+.cl-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px 14px}
+.cl-card h2{font-family:"Fraunces",serif;font-size:27px;font-weight:600;line-height:1.1;margin-bottom:7px}
+.cl-card > p{font-size:13.5px;color:#B9BFD6}
+.cl-next{list-style:none;margin-top:13px;display:grid;gap:8px;font-size:13px;color:var(--dim)}
+.cl-next li{position:relative;padding-left:17px}
+.cl-next li::before{content:"→";position:absolute;left:0;color:var(--meteor)}
+.cl-card .wishcard{margin-top:15px}
+body.after .cpanel{display:none}
+/* la linea de colores del timeline muere aqui en degradado, en vez de cortarse con un borde */
+footer{position:relative;padding:26px 0 36px;color:var(--dim);font-size:12.5px;text-align:center}
+footer::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--line) 22%,var(--line) 78%,transparent)}
+footer .wish{font-family:"Fraunces",serif;font-style:italic;font-size:17px;color:var(--ink)}
+footer .share{margin:16px auto 4px;display:block;font-size:12.5px;padding:8px 18px}
+footer .made{margin-top:16px;font-family:"Fraunces",serif;font-size:15px;color:var(--ink)}
+footer .made > a{color:var(--ink);text-decoration:underline;text-decoration-color:rgba(233,234,242,.45);
+  text-underline-offset:4px;transition:color .3s}
+footer .made > a:hover{color:var(--aura);text-decoration-color:var(--aura)}
+footer .tags{display:flex;justify-content:center;flex-wrap:wrap;gap:6px;margin-top:9px;
+  font-family:"Instrument Sans",sans-serif;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+footer .tags > *{border:1px solid var(--line);border-radius:999px;padding:4px 11px;color:var(--dim);text-decoration:none}
+footer .tags > a:hover{color:var(--ink);border-color:var(--dim)}
+footer .src{margin-top:14px;font-size:11px;color:#7B8098;letter-spacing:.03em}
 @media (prefers-reduced-motion: reduce){
   .now-ring,.live-dot,  .now,.track-fill,.ev,#ctapeg,.ctape{transition:none}
 }
@@ -354,6 +378,20 @@ footer .made a:hover{color:var(--aura);text-decoration-color:var(--aura)}
     </div>
   </div>
 </header>
+
+<section class="closed" id="closed" hidden>
+  <div class="wrap">
+    <div class="cl-card">
+      <h2 data-es="Ya ha pasado.">Ja ha passat.</h2>
+      <p data-es="El Sol se tapó al 99% a las 20:29 sobre Montserrat, y las Perseidas cayeron hasta bien entrada la noche.">El Sol es va tapar al 99% a les 20:29 sobre Montserrat, i les Perseides van caure fins ben entrada la nit.</p>
+      <ul class="cl-next">
+        <li data-es="Las Perseidas vuelven <b>cada 12 de agosto</b>.">Les Perseides tornen <b>cada 12 d'agost</b>.</li>
+        <li data-es="Próximo eclipse total en España: <b>2 de agosto de 2027</b>, con la franja por el sur. Desde aquí, parcial otra vez.">Proper eclipsi total a Espanya: <b>2 d'agost de 2027</b>, amb la franja pel sud. Des d'aquí, parcial una altra vegada.</li>
+      </ul>
+      <p class="wishcard"><svg><use href="#i-venus"/></svg><span data-es="Espero que hayas visto alguna.">Espero que n'hagis vist alguna.</span></p>
+    </div>
+  </div>
+</section>
 
 <section class="tl-section">
   <div class="wrap">
@@ -528,9 +566,19 @@ footer .made a:hover{color:var(--aura);text-decoration-color:var(--aura)}
 
 <footer>
   <div class="wrap">
-    <p class="wish" data-es="&quot;Pide un deseo con la primera.&quot;">«Demana un desig amb la primera.»</p>
+    <p class="wish" data-es="«Que veas muchas.»">«Que en vegis moltes.»</p>
     <p data-es="Eclipse casi total + Perseidas con Luna nueva. No se repetirá en muchos años.">Eclipsi gairebé total + Perseides amb Lluna nova. No es repetirà en molts anys.</p>
-    <p class="made" data-es="Hecho por <a href=&quot;https://www.linkedin.com/in/osanchezroca/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Oscar</a> + Claude">Fet per <a href="https://www.linkedin.com/in/osanchezroca/" target="_blank" rel="noopener">Oscar</a> + Claude</p>
+
+    <button class="goto share" id="shareBtn" type="button"></button>
+
+    <p class="made">
+      <a href="https://www.linkedin.com/in/osanchezroca/" target="_blank" rel="noopener me">Oscar Sánchez</a>
+      <span class="tags">
+        <a href="https://github.com/osanchezroca/eclipseperseidas" target="_blank" rel="noopener" data-es="código abierto">codi obert</a>
+        <span data-es="hecho con Claude en un día">fet amb Claude en un dia</span>
+      </span>
+    </p>
+    <p class="src" data-es="Horarios del IGN · datos del eclipse verificados">Horaris de l'IGN · dades de l'eclipsi verificades</p>
   </div>
 </footer>
 
@@ -542,6 +590,9 @@ footer .made a:hover{color:var(--aura);text-decoration-color:var(--aura)}
       start:'La nit comença a les 18:30', falta:'Falten ', mochila:' · prepara la motxilla 🎒',
       prep:'Prepara la motxilla 🎒', fin:'Fi de la nit — a dormir 🌙', deseo:'Esperem que hagis demanat el desig',
       ahora:'Ara: ', sig:'Següent: ', en:' · en ', hasta3:'Fins a les 03:00 · com més tard, més fugaces',
+      dies:' dies', afterT:'Ja ha passat', afterN:"Les Perseides tornen cada 12 d'agost",
+      share:'Comparteix-la', copied:'Enllaç copiat', copyFail:"No s'ha pogut copiar",
+      shareTxt:"Guia en directe de l'eclipsi i les Perseides des de Sabadell",
       go1:"Vés a l'amfiteatre", go2:'Vés al camp',
       to2:'Cap al Sol sobre Montserrat', at2:'Estàs mirant cap al Sol sobre Montserrat.',
       to4:'Cap al cel entre La Mola i el Montseny', at4:'Estàs mirant cap al cel entre La Mola i el Montseny.',
@@ -565,6 +616,9 @@ footer .made a:hover{color:var(--aura);text-decoration-color:var(--aura)}
       start:'La noche empieza a las 18:30', falta:'Faltan ', mochila:' · prepara la mochila 🎒',
       prep:'Prepara la mochila 🎒', fin:'Fin de la noche — a dormir 🌙', deseo:'Esperamos que hayas pedido tu deseo',
       ahora:'Ahora: ', sig:'Siguiente: ', en:' · en ', hasta3:'Hasta las 03:00 · cuanto más tarde, más fugaces',
+      dies:' días', afterT:'Ya ha pasado', afterN:'Las Perseidas vuelven cada 12 de agosto',
+      share:'Compártela', copied:'Enlace copiado', copyFail:'No se pudo copiar',
+      shareTxt:'Guía en directo del eclipse y las Perseidas desde Sabadell',
       go1:'Dirígete al anfiteatro', go2:'Dirígete al campo',
       to2:'Hacia el Sol sobre Montserrat', at2:'Estás mirando hacia el Sol sobre Montserrat.',
       to4:'Hacia el cielo entre La Mola y el Montseny', at4:'Estás mirando hacia el cielo entre La Mola y el Montseny.',
@@ -631,11 +685,14 @@ footer .made a:hover{color:var(--aura);text-decoration-color:var(--aura)}
   var demoTime = document.getElementById('demoTime');
 
   // timeline spans 18:00 (min 0) -> 04:00 (min 600)
+  // Minut 0 = 12 d'agost de 2026 a les 18:00. Sense la data nomes miravem l'hora, i
+  // el 13 d'agost la pagina tornaria a dir "Ara: comenca l'eclipsi".
+  var T0 = new Date(2026, 7, 12, 18, 0, 0);
   function nowInfo(){
-    var d = new Date(), h = d.getHours(), base = h*60 + d.getMinutes();
-    if (h >= 18) return {min: base - 1080, pre: false};      // 18:00-23:59
-    if (h < 4)   return {min: base + 360,  pre: false};      // 00:00-03:59
-    return {min: 30, pre: true, until: 1110 - base};         // daytime: preview of 18:30
+    var mins = Math.round((new Date() - T0) / 60000);
+    if (mins < -1)  return {min: 30, pre: true, until: -mins, days: Math.floor(-mins / 1440)};
+    if (mins > 600) return {min: 600, after: true};
+    return {min: mins, pre: false};
   }
   function clockNow(){
     var d = new Date(), h = d.getHours(), m = d.getMinutes();
@@ -679,11 +736,16 @@ footer .made a:hover{color:var(--aura);text-decoration-color:var(--aura)}
   // ponytail: navigator.vibrate solo existe en Android/Chrome y exige un gesto previo; iOS no expone vibración web, allí el feedback es solo visual.
   window.__buzz = function(p){ if (navigator.vibrate){ try { navigator.vibrate(p); } catch(e){} } };
 
+  var closedEl = document.getElementById('closed');
   var lastIdx = null;
   function update(){
     var demo = demoOn.checked;
     var info = nowInfo();
     var pre = !demo && info.pre;
+    var after = !demo && !!info.after;
+    window.__after = after;                       // la brujula y el cielo lo consultan
+    document.body.classList.toggle('after', after);
+    closedEl.hidden = !after;
     var min = demo ? +demoRange.value : info.min;
     clock.textContent = demo ? fmt(min) : clockNow();
     demoTime.textContent = fmt(demo ? min : Math.max(0, Math.min(600, min)));
@@ -718,10 +780,15 @@ footer .made a:hover{color:var(--aura);text-decoration-color:var(--aura)}
     document.body.classList.toggle('night', !pre && min >= 270); // 22:30 en adelante ya es noche cerrada
 
     // status text
-    if (pre){
+    if (after){
+      stTitle.textContent = T('afterT');
+      stTitle.style.color = '';
+      stNext.textContent = T('afterN');
+    } else if (pre){
       stTitle.textContent = T('start');
       stTitle.style.color = '';
-      stNext.textContent = T('falta') + hm(info.until) + T('mochila');
+      stNext.textContent = T('falta') +
+        (info.days >= 1 ? info.days + T('dies') : hm(info.until)) + T('mochila');
     } else if (idx < 0){
       stTitle.textContent = T('start');
       stTitle.style.color = '';
@@ -806,6 +873,37 @@ footer .made a:hover{color:var(--aura);text-decoration-color:var(--aura)}
   update();
   setInterval(update, 20000);
   window.__i18n.push(update);
+
+  // Compartir: lo nativo del movil si existe, y copiar el enlace si no.
+  var shareBtn = document.getElementById('shareBtn');
+  function shareLabel(){ shareBtn.textContent = T('share'); }
+  shareLabel(); window.__i18n.push(shareLabel);
+  // clipboard.writeText rechaza si la pestaña no tiene foco, asi que hay respaldo
+  // y, si tampoco cuela, se dice; un boton que no contesta es peor que un "no he podido".
+  function copyUrl(url){
+    if (navigator.clipboard) return navigator.clipboard.writeText(url);
+    return Promise.reject();
+  }
+  function copyLegacy(url){
+    var t = document.createElement('textarea');
+    t.value = url; t.setAttribute('readonly', '');
+    t.style.cssText = 'position:fixed;top:0;opacity:0';
+    document.body.appendChild(t); t.select();
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch(e){}
+    document.body.removeChild(t);
+    return ok;
+  }
+  shareBtn.addEventListener('click', function(){
+    var url = location.href.split('#')[0];
+    if (navigator.share){
+      navigator.share({title: document.title, text: T('shareTxt'), url: url}).catch(function(){});
+      return;
+    }
+    var say = function(k, ms){ shareBtn.textContent = T(k); setTimeout(shareLabel, ms); };
+    copyUrl(url).then(function(){ say('copied', 2200); },
+                      function(){ say(copyLegacy(url) ? 'copied' : 'copyFail', 2600); });
+  });
   // la barra de abajo crece a dos filas en móvil (y con el texto ampliado del sistema): el cuerpo la compensa
   var bar = document.querySelector('.livebar');
   function fitBottom(){ document.body.style.paddingBottom = (bar.offsetHeight + 16) + 'px'; }
@@ -817,9 +915,9 @@ footer .made a:hover{color:var(--aura);text-decoration-color:var(--aura)}
     window.addEventListener(e, function(){ touched = true; }, {once:true, passive:true});
   });
   window.addEventListener('load', function(){
-    requestAnimationFrame(function(){ if (window.pageYOffset < 4) scrollToNow('auto'); });
+    requestAnimationFrame(function(){ if (window.pageYOffset < 4 && !window.__after) scrollToNow('auto'); });
     // el panel de arriba cambia de alto al entrar las fuentes o el sensor, y eso desplaza el contenido: se recoloca una vez
-    setTimeout(function(){ if (!touched) scrollToNow('auto'); }, 600);
+    setTimeout(function(){ if (!touched && !window.__after) scrollToNow('auto'); }, 600);
   });
 })();
 </script>
@@ -852,6 +950,7 @@ footer .made a:hover{color:var(--aura);text-decoration-color:var(--aura)}
   }
   function dip(m){ return (m>141 && m<157) ? 1-Math.abs(m-149)/8 : 0; }
   function rate(m){
+    if (window.__after) return 0;                 // el dia despues no caen fugaces
     if (m < 270) return 0;
     if (m < 300) return 0.003;
     if (m < 420) return 0.008;
@@ -971,7 +1070,7 @@ footer .made a:hover{color:var(--aura);text-decoration-color:var(--aura)}
   function haptic(now){
     // en reposo calla: el panel está siempre abierto y no puede vibrar toda la noche.
     // hGo = tramo "de camino": no hay objetivo, así que tampoco vibra.
-    if (hGo || heading == null || now - hMove > 2500 || document.visibilityState !== 'visible') return;
+    if (window.__after || hGo || heading == null || now - hMove > 2500 || document.visibilityState !== 'visible') return;
     var d = Math.abs(hDelta);
     if (d <= hTol){
       if (hapState !== 'lock'){ hapState = 'lock'; hapT = now; window.__buzz([70,50,70,50,220]); return; }
@@ -1059,6 +1158,11 @@ footer .made a:hover{color:var(--aura);text-decoration-color:var(--aura)}
     heading = h; render();
   }
   function render(){
+    if (window.__after){                          // sense objectiu, el HUD no te sentit
+      if (!panel.hidden){ panel.hidden = true; document.body.style.paddingTop = ''; }
+      return;
+    }
+    if (panel.hidden) panel.hidden = false;
     var min = (window.__nightMin != null ? window.__nightMin : 30);
     var tg = target(min);
     setTip(min);
