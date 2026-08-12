@@ -1,0 +1,39 @@
+Hoy, a las 20:29, Sabadell se queda casi a oscuras.
+
+Y hay dos cosas que mucha gente va a salir a buscar esta tarde que desde aquí no se ven.
+
+La corona y el anillo de diamante. Eso solo sale en la franja de totalidad, que pasa por el sur de Lleida y Tarragona. Aquí se tapa el 99%, que suena a casi lo mismo pero no lo es: ese 1% sigue siendo tan bestia que en ningún momento se puede mirar sin gafas.
+
+Estuve buscando esta información y todo venía en formato astrónomo. Azimut 286°, altura 4°, magnitud. Yo quería saber a qué hora, hacia dónde y qué no hacer.
+
+Así que me hice una app. Un día, a ratos, entre reuniones.
+
+QUÉ PASA AHORA
+Una línea de tiempo de las 18:00 a las 04:00 que se mueve sola: marca dónde estás, tacha lo que ya ha pasado y te dice qué toca después. El fondo cambia de color a la vez que el cielo de verdad, hasta negro del todo cuando empiezan las Perseidas.
+
+HACIA DÓNDE MIRO
+La brújula usa los sensores del móvil y el borde de arriba hace de puntero. Giras sobre ti mismo y notas toquecitos, uno por cada marca que cruzas. Al acercarte al punto bueno se juntan, y cuando lo clavas hace una ráfaga que no se confunde con nada. Se puede usar sin mirar la pantalla, que de noche importa más de lo que parece.
+
+La primera versión daba los grados y no servía para nada, porque nadie sabe dónde cae el azimut 286°. Ahora dice "encima de Montserrat" o "el arco entre La Mola y el Montseny".
+
+LO QUE NO HAY QUE HACER
+Gafas ISO 12312-2. Siempre. Las de sol no valen. Si pasas de las gafas al menos lo tienes bien montado: el Taulí está justo al lado del parque.
+
+Guardar el móvil 20 minutos antes de mirar fugaces, que es lo que tardan los ojos. Y llevar chaqueta: parece tontería en agosto, hasta que llevas dos horas quieto en un campo.
+
+CÓMO ESTÁ HECHA
+Con Claude. Yo decidía y él escribía el código, y no le veo sentido a esconderlo. Es un solo archivo HTML, sin frameworks ni build. Perdí más tiempo en que la vibración funcionara (el navegador no te deja vibrar hasta que tocas la pantalla una vez) que en todo el resto junto.
+
+Y creo que ahí hay algo. Esto no le sirve a nadie el jueves: es para una noche, en una ciudad, mirando unas montañas concretas. Hace dos años no me habría puesto porque no compensaba el rato. Ahora sí, y eso me parece más interesante que el eclipse.
+
+Está en catalán y en castellano, es gratis y no pide nada.
+
+👉 https://osanchezroca.github.io/eclipseperseidas/
+
+Ábrela antes de salir de casa, que en el campo igual no hay cobertura. Yo estaré en el anfiteatro del Parc Catalunya a las 19:35.
+
+¿Vosotros dónde lo vais a ver? Si sabéis de algún sitio bueno por Sabadell, sin farolas y con el oeste despejado, decidlo por aquí.
+
+@Agrupació Astronòmica de Sabadell · @Ajuntament de Sabadell · @Diari de Sabadell
+
+#Sabadell #Eclipse2026 #Perseidas #Vibecoding
