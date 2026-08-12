@@ -98,7 +98,7 @@ Todo vive en un solo archivo con tres `<script>` IIFE independientes que se comu
 
 ## Deploy
 
-- Repo: `osanchezroca/eclipse-perseidas-sabadell` → Vercel (framework "Other", sin build). En la raíz: `index.html` (toda la app), `manifest.webmanifest` + `icon.svg` (instalable, `display:standalone`, `viewport-fit=cover` para los `env(safe-area-inset-*)` de las dos barras fijas), `README.md`. Sin service worker a propósito: nada que invalidar en cada deploy.
+- Repo: `osanchezroca/eclipseperseidas` → Vercel (framework "Other", sin build). En la raíz: `index.html` (toda la app), `manifest.webmanifest` + `icon.svg` (instalable, `display:standalone`, `viewport-fit=cover` para los `env(safe-area-inset-*)` de las dos barras fijas), `README.md`. Sin service worker a propósito: nada que invalidar en cada deploy.
 - El repo se creó de cero para que el historial no contenga la ubicación del punto 2. No traer commits antiguos de otros repos ni volver a escribir coordenadas en ningún fichero.
 - Flujo: editar → `git add . && git commit && git push` → Vercel auto-despliega.
 - Probar siempre en móvil por https (brújula y sensores) y con el slider de previsualización (cubre las 10 horas sin esperar a la noche).

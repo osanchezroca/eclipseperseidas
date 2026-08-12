@@ -39,13 +39,6 @@ b{color:var(--ink);font-weight:600}
 .lang button{font:600 11px "Instrument Sans",sans-serif;letter-spacing:.06em;color:var(--dim);
   background:transparent;border:0;padding:6px 7px;cursor:pointer;transition:color .3s,background .3s}
 .lang button[aria-pressed="true"]{color:var(--night);background:var(--aura)}
-/* en móvil el selector le roba sitio al estado: se aprieta todo un poco */
-@media (max-width:420px){
-  .livebar .wrap{gap:9px;padding:10px 14px}
-  .clock{font-size:23px;min-width:62px}
-  .goto{padding:6px 10px}
-  .lang button{padding:6px 6px}
-}
 .live-dot{width:8px;height:8px;border-radius:50%;background:var(--aura);flex:none;box-shadow:0 0 10px 2px var(--aura);animation:pulse 2s ease-in-out infinite}
 .status{flex:1;min-width:0}
 .status .st-title{font-weight:600;font-size:13.5px;color:var(--aura);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color .6s}
@@ -55,6 +48,17 @@ b{color:var(--ink);font-weight:600}
   transition:color .6s,border-color .6s,background .2s}
 .goto:hover{background:rgba(255,255,255,.07)}
 .goto:active{transform:scale(.96)}
+/* En móvil no cabe todo en una fila: reloj y botones arriba, el estado entero debajo.
+   Va después de las reglas que sobrescribe, o pierde por orden de cascada.
+   El alto extra de la barra lo compensa un ResizeObserver sobre body.paddingBottom. */
+@media (max-width:600px){
+  .livebar .wrap{flex-wrap:wrap;gap:7px 10px;padding:9px 14px}
+  .clock{font-size:23px;min-width:0}
+  .livebar .goto{margin-left:auto;padding:6px 11px}
+  .lang button{padding:6px 7px}
+  .status{order:3;flex:1 0 100%}
+  .status .st-title,.status .st-next{white-space:normal}
+}
 /* ===== BRÚJULA · cinta HUD arriba (el borde superior del móvil es el puntero) ===== */
 .cpanel{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:640px;z-index:51;
   padding:env(safe-area-inset-top) 0 0;overflow:hidden;
@@ -81,7 +85,7 @@ b{color:var(--ink);font-weight:600}
 .cpanel.hit .lubt{fill:var(--aura);filter:drop-shadow(0 1px 7px var(--aura))}
 /* primero la acción (grande), después el dato de referencia (pequeño) */
 .cinfo{padding:7px 18px 0}
-.ct1{font-family:"Fraunces",serif;font-size:25px;font-weight:600;line-height:1.12;letter-spacing:-.01em}
+.ct1{font-family:"Fraunces",serif;font-size:clamp(20px,5.4vw,25px);font-weight:600;line-height:1.12;letter-spacing:-.01em}
 .ct1.ok{color:var(--aura)}
 .ct2{font-size:13px;color:#B9BFD6;margin-top:3px}
 .cread{display:flex;align-items:baseline;gap:9px;padding:7px 18px 11px;
@@ -158,7 +162,7 @@ h1 em{font-style:italic;color:var(--dusk)}
 .scene .sl{fill:var(--dusk)}
 .scene .yl{fill:var(--ink)}
 /* esquema visual: pictograma + dos palabras, para hacer sin leer parrafos */
-.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:5px;margin-top:8px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(82px,1fr));gap:5px;margin-top:8px}
 .tile{display:flex;align-items:center;gap:8px;
   background:rgba(255,255,255,.045);border:1px solid rgba(42,49,88,.7);border-radius:9px;padding:7px 9px}
 .tile svg{width:25px;height:25px;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
@@ -243,8 +247,8 @@ footer .made a:hover{color:var(--aura);text-decoration-color:var(--aura)}
   <svg class="ctape" id="ctape" viewBox="0 0 376 62" aria-hidden="true">
     <defs>
       <linearGradient id="tfade" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0" stop-color="#000"/><stop offset=".11" stop-color="#fff"/>
-        <stop offset=".89" stop-color="#fff"/><stop offset="1" stop-color="#000"/>
+        <stop offset="0" stop-color="#000"/><stop offset=".16" stop-color="#fff"/>
+        <stop offset=".84" stop-color="#fff"/><stop offset="1" stop-color="#000"/>
       </linearGradient>
       <mask id="tmask" maskUnits="userSpaceOnUse" x="0" y="0" width="376" height="62">
         <rect id="tmaskr" width="376" height="62" fill="url(#tfade)"/>
@@ -726,10 +730,20 @@ footer .made a:hover{color:var(--aura);text-decoration-color:var(--aura)}
   update();
   setInterval(update, 20000);
   window.__i18n.push(update);
+  // la barra de abajo crece a dos filas en móvil (y con el texto ampliado del sistema): el cuerpo la compensa
+  var bar = document.querySelector('.livebar');
+  function fitBottom(){ document.body.style.paddingBottom = (bar.offsetHeight + 16) + 'px'; }
+  if (window.ResizeObserver) new ResizeObserver(fitBottom).observe(bar); else fitBottom();
   // Con solo abrirla, la tarjeta de lo que toca ahora ya está delante: sin scroll ni botones.
   // Tras 'load' porque las fuentes mueven el layout, y solo si nadie ha tocado el scroll todavía.
+  var touched = false;
+  ['wheel','touchstart','keydown'].forEach(function(e){
+    window.addEventListener(e, function(){ touched = true; }, {once:true, passive:true});
+  });
   window.addEventListener('load', function(){
     requestAnimationFrame(function(){ if (window.pageYOffset < 4) scrollToNow('auto'); });
+    // el panel de arriba cambia de alto al entrar las fuentes o el sensor, y eso desplaza el contenido: se recoloca una vez
+    setTimeout(function(){ if (!touched) scrollToNow('auto'); }, 600);
   });
 })();
 </script>
